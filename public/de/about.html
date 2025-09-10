@@ -1,0 +1,381 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+<meta  charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GOR ARCHITECTURE</title> 
+
+<!-- Favicons -->
+<link rel="shortcut icon" type="image/png" href="../favicon.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../apple-touch-icon-114x114.png">
+
+<!-- Styles -->
+<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet" media="screen">
+</head>
+<body>
+  
+    <!-- Loader -->
+
+    <div class="loader">
+      <div class="page-lines">
+        <div class="container">
+          <div class="col-line col-xs-4">
+            <div class="line"></div>
+          </div>
+          <div class="col-line col-xs-4">
+            <div class="line"></div>
+          </div>
+          <div class="col-line col-xs-4">
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+      <div class="loader-brand"> 
+        <div class="sk-folding-cube">
+          <div class="sk-cube1 sk-cube"></div>
+          <div class="sk-cube2 sk-cube"></div>
+          <div class="sk-cube4 sk-cube"></div>
+          <div class="sk-cube3 sk-cube"></div>
+        </div>
+      </div>
+    </div>
+
+    <header id="top" class="header-home">
+      <div class="brand-panel">
+        <a href="index.html" class="brand js-target-scroll">
+          <span>
+            <img style="width: 140px; margin-left: -10px;" src="../logo.png" alt="">
+          </span>
+        </a>
+        <div style="margin-left: 170px;" class="brand-name">GOR Architecture</div>
+      </div>
+      </div> 
+    
+      <!-- Navigation Desktop -->
+       
+          <nav class="navbar-desctop visible-md visible-lg">
+            <div class="container">
+              <div style="display: flex; justify-content: space-around; align-items: center;">
+                <div>
+                  <a href="index.html" class="brand js-target-scroll">
+                    <span>
+                      <img style="width: 150px;" src="../logo.png" alt="">
+                    </span>
+                  </a>
+                </div>
+                <div>
+                  <ul class="navbar-desctop-menu">
+                    <li class="active">
+                      <a href="about.html">Über Uns</a>
+                    </li>
+                    <li>
+                      <a href="projects.html">Portfolio</a>
+                    </li>
+                    <li>
+                      <a href="contacts.html">Kontakt</a>
+                    </li>
+                    <li><a href="#">Deutsch</a>
+                      <ul>
+                        <li><a href="#" onclick="switchLanguage('en')">English</a></li>
+                        <li><a href="#" onclick="switchLanguage('ru')">Русский</a></li>
+                        <li><a href="#" onclick="switchLanguage('ro')">Română</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </nav>
+    
+      <!-- Navigation Mobile -->
+    
+      <nav class="navbar-mobile">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <a href="#top" class="brand js-target-scroll">
+              <span>
+                <img style="width: 140px; margin-left: -10px;" src="../logo.png" alt="">
+              </span>
+            </a>
+          </div>
+          <div>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-mobile">
+              <span class="sr-only">Navigation umschalten</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+        </div>
+    
+        <!-- Navbar Collapse -->
+    
+        <div class="collapse navbar-collapse" id="navbar-mobile"> 
+          <ul class="navbar-nav-mobile">
+            <li class="active"><a href="about.html">Über Uns</a></li>
+            <li><a href="projects.html">Portfolio</a></li>
+            <li><a href="contacts.html">Kontakt</a></li>
+            <li>
+              <a href="#">Deutsch<i class="fa fa-angle-down"></i></a>
+              <ul>
+                <li><a href="#" onclick="switchLanguage('en')">English</a></li>
+                <li><a href="#" onclick="switchLanguage('ru')">Русский</a></li>
+                <li><a href="#" onclick="switchLanguage('ro')">Română</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav> 
+    </header>
+
+  <!-- Layout -->
+
+  <div class="layout">
+    
+    <!-- Home -->
+    
+    <main class="main main-inner bg-about" data-stellar-background-ratio="0.6">
+      <div class="container">
+        <header class="main-header">
+          <h1>Über Uns</h1>
+        </header>
+      </div>
+
+      <!-- Lines -->
+
+      <div class="page-lines">
+        <div class="container">
+          <div class="col-line col-xs-4">
+            <div class="line"></div>
+          </div>
+          <div class="col-line col-xs-4">
+            <div class="line"></div>
+          </div>
+          <div class="col-line col-xs-4">
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="content">   
+    
+      <!-- About  -->
+
+      <section id="about" class="about">
+        <div class="container">
+          <div class="entry">
+            <h3 class="entry-title">Wir verwandeln Ideen in Kunstwerke<span class="text-primary">.</span></h3>
+            <p class="entry-text">GOR Architecture ist ein Architekturbüro, das sich auf die Planung von Wohn-, öffentlichen und Industriegebäuden spezialisiert hat. Wir verbinden Kreativität, ingenieurtechnische Präzision und Liebe zum Detail, um moderne und funktionale Räume zu schaffen.
+
+              Unser Team besteht aus erfahrenen Architekten, Ingenieuren und Designern, die Projekte in allen Phasen begleiten – von der Konzeptentwicklung bis zur Umsetzung. Wir schätzen den individuellen Ansatz und streben stets danach, dass jedes Projekt den Wünschen des Kunden und den Qualitätsstandards entspricht.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services -->
+
+      <section id="services" class="services section">
+        <div class="container">
+          <header class="section-header">
+            <h2 class="section-title"><span class="text-primary">Unsere</span> Leistungen</h2>
+          </header>
+          <div class="section-content">
+            <div class="row-services row-base row">
+              <div class="col-base col-service col-sm-6 col-md-4 wow fadeInUp">
+                <div class="service-item">
+                  <img alt="" src="../img/img-icon/home.png" style="width: 5rem;">
+                  <h4>Planung von Wohngebäuden</h4>
+                  <p>Wir entwickeln Architektur für Einfamilienhäuser, Reihenhäuser und Wohnanlagen – mit Fokus auf Komfort, Funktionalität und Ästhetik.</p>
+                </div>
+              </div>
+              <div class="col-base col-service col-sm-6 col-md-4 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-item">
+                  <img alt="" src="../img/img-icon/office.png" style="width: 5rem;">
+                  <h4>Planung von öffentlichen Gebäuden</h4>
+                  <p>Wir entwerfen Projekte für Büros, Schulen, Kindergärten, medizinische Einrichtungen und Einkaufszentren mit durchdachter Logistik und modernem Design.</p>
+                </div>
+              </div>
+              <div class="clearfix visible-sm"></div>
+              <div class="col-base col-service col-sm-6 col-md-4 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="service-item">
+                  <img alt="" src="../img/img-icon/factory.png" style="width: 5rem;">
+                  <h4>Planung von Industrieanlagen</h4>
+                  <p>Wir planen und entwerfen Produktionsstätten, Lagerhallen und Logistikzentren unter Einhaltung aller technischen Normen und Sicherheitsanforderungen.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section-content">
+            <div class="row-services row-base row">
+              <div class="col-base col-service col-sm-6 col-md-4 wow fadeInUp">
+                <div class="service-item">
+                  <img alt="" src="../img/img-icon/doc.png" style="width: 4rem;">
+                  <h4>Architektonische Planung<br> und Ausführungsplanung</h4>
+                  <p>Wir liefern ein komplettes Paket an Zeichnungen und technischer Dokumentation, die für den Bau und die Genehmigung notwendig sind.</p>
+                </div>
+              </div>
+              <div class="col-base col-service col-sm-6 col-md-4 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-item">
+                  <img alt="" src="../img/img-icon/3d.png" style="width: 5rem;">
+                  <h4>3D-Visualisierung und Fassadendesign</h4>
+                  <p>Wir erstellen fotorealistische Visualisierungen von Gebäuden und wählen harmonische Lösungen für das äußere Erscheinungsbild der Objekte.</p>
+                </div>
+              </div>
+              <div class="clearfix visible-sm"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contacts -->
+
+      <section class="contacts section">
+        <div class="container">
+          <header class="section-header">
+            <h2 class="section-title">Kontaktieren <span class="text-primary">Sie uns</span></h2>
+            <strong class="fade-title-right">Kontakte</strong>
+          </header>
+          <div class="section-content">
+            <div class="row-base row">
+              <div class="col-address col-base col-md-4">
+                <a href="tel:+37379337000" style="text-decoration: none;">+373 79 337 000</a><br>
+                <a href="mailto:info@gorarchitecture.md" style="text-decoration: none;">info@gorarchitecture.md</a><br>
+                <a href="https://www.google.com/maps?q=Alexandru+cel+Bun+91,+Chișinau,+Moldova" style="text-decoration: none;" target="_blank" class="header-address">Alexandru cel Bun 91, Chișinău, Moldawien</a>
+              </div>
+              <div class="col-base col-md-8">
+                <form class="js-ajax-form" action="https://formspree.io/f/xnndlqpn" method="POST">
+                  <div class="row-field row">
+                    <div class="col-field col-sm-6 col-md-4">
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="name" placeholder="Name" required>
+                      </div>
+                      <div class="form-group">
+                        <input type="email" class="form-control" name="email" required placeholder="E-Mail *">
+                      </div>
+                    </div>
+                    <div class="col-field col-sm-6 col-md-4">
+                      <div class="form-group">
+                        <input type="tel" class="form-control" name="phone" placeholder="Telefon">
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="company" placeholder="Firma">
+                      </div>
+                    </div>
+                    <div class="col-field col-sm-12 col-md-4">
+                      <div class="form-group">
+                        <textarea class="form-control" name="message" placeholder="Nachricht *" required></textarea>
+                      </div>
+                    </div>
+                    <div class="col-message col-field col-sm-12">
+                      <div class="form-group">
+                        <div class="success-message">
+                          <i class="fa fa-check text-primary"></i> Danke! Ihre Nachricht wurde erfolgreich gesendet...
+                        </div>
+                        <div class="error-message">
+                          Leider ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-submit text-right">
+                    <button style="font-family: sans-serif;" type="submit" class="btn btn-shadow-2 wow swing">
+                      Absenden <i class="icon-next"></i>
+                    </button>
+                  </div>
+                </form>                
+              </div>              
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Footer -->
+      
+      <footer id="footer" class="footer">     
+        <div class="container">
+          <div class="row-base row">
+            <div class="col-base text-left-md col-md-4">
+              <a href="#" class="brand">
+                <span>
+                  <img style="width: 150px;" src="../logo.png" alt="">
+                </span>
+              </a>
+            </div>
+            <div class="text-center-md col-base col-md-4">
+              <a href="https://scalasoft.md/" class="author-link">
+                by Sala Soft
+              </a>
+            </div>
+            <div class="text-right-md col-base col-md-4">
+              © GOR Architecture 2025. Alle Rechte vorbehalten.
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <!-- Lines -->
+
+      <div class="page-lines">
+        <div class="container">
+          <div class="col-line col-xs-4">
+            <div class="line"></div>
+          </div>
+          <div class="col-line col-xs-4">
+            <div class="line"></div>
+          </div>
+          <div class="col-line col-xs-4">
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- SCRIPTS -->
+
+<script>
+  function switchLanguage(lang) {
+    const supportedLangs = ['en', 'ro', 'ru', 'de'];
+
+    if (supportedLangs.includes(lang)) {
+      window.location.href = `/${lang}/about.html`;
+    } else {
+      window.location.href = `/en/index.html`;
+    }
+  }
+  
+  document.addEventListener("DOMContentLoaded", function () {
+    const userLang = navigator.language || navigator.userLanguage;
+    const lang = userLang.split('-')[0];
+    const supportedLangs = ['en', 'ro', 'ru', 'de'];
+
+    if (supportedLangs.includes(lang)) {
+      if (window.location.pathname === "/about.html" || window.location.pathname === "/") {
+        window.location.href = `/${lang}/about.html`;
+      }
+    } else {
+      window.location.href = `/en/about.html`;
+    }
+  });
+
+</script>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/smoothscroll.js"></script>
+<script src="../js/jquery.validate.min.js"></script>
+<script src="../js/wow.min.js"></script>
+<script src="../js/jquery.stellar.min.js"></script>
+<script src="../js/jquery.magnific-popup.js"></script>
+<script src="../js/owl.carousel.min.js"></script>
+<script src="../js/interface.js"></script> 
+</body>
+</html>

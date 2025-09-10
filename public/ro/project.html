@@ -1,0 +1,470 @@
+<!DOCTYPE HTML>
+<html lang="ro">
+<head>
+<meta  charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone=no">
+<title>GOR ARCHITECTURE</title> 
+
+<!-- Favicons -->
+<link rel="shortcut icon" href="../favicon.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../apple-touch-icon-114x114.png">
+
+<!-- Styles -->
+<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet" media="screen">
+</head>
+<body>
+  
+    <!-- Loader -->
+
+    <div class="loader">
+      <div class="page-lines">
+        <div class="container">
+          <div class="col-line col-xs-4">
+            <div class="line"></div>
+          </div>
+          <div class="col-line col-xs-4">
+            <div class="line"></div>
+          </div>
+          <div class="col-line col-xs-4">
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+      <div class="loader-brand"> 
+        <div class="sk-folding-cube">
+          <div class="sk-cube1 sk-cube"></div>
+          <div class="sk-cube2 sk-cube"></div>
+          <div class="sk-cube4 sk-cube"></div>
+          <div class="sk-cube3 sk-cube"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+
+    <header id="top" class="header-home">
+      <div class="brand-panel">
+        <a href="index.html" class="brand js-target-scroll">
+          <span>
+            <img style="width: 140px; margin-left: -10px;" src="../logo.png" alt="">
+          </span>
+        </a>
+        <div style="margin-left: 170px;" class="brand-name">GOR Architecture</div>
+      </div>
+      </div> 
+    
+      <!-- Navigation Desctop -->
+       
+          <nav class="navbar-desctop visible-md visible-lg">
+            <div class="container">
+              <div style="display: flex; justify-content: space-around; align-items: center;">
+                <div>
+                  <a href="index.html" class="brand js-target-scroll">
+                    <span>
+                      <img style="width: 150px;" src="../logo.png" alt="">
+                    </span>
+                  </a>
+                </div>
+                <div>
+                  <ul class="navbar-desctop-menu">
+                    <li >
+                      <a href="about.html">Despre Noi</a>
+                    </li>
+                    <li class="active">
+                      <a href="projects.html">Portofoliu</a>
+                    </li>
+                    <li>
+                      <a href="contacts.html">Contacte</a>
+                    </li>
+                    <li><a href="#">Română</a>
+                      <ul>
+                        <li><a href="#" onclick="switchLanguage('ru')">Русский</a></li>
+                        <li><a href="#" onclick="switchLanguage('en')">English</a></li>
+                        <li><a href="#" onclick="switchLanguage('de')">Deutsch</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </nav>
+    
+      <!-- Navigation Mobile -->
+    
+      <nav class="navbar-mobile">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <a href="#top" class="brand js-target-scroll">
+              <span>
+                <img style="width: 140px; margin-left: -10px;" src="../logo.png" alt="">
+              </span>
+            </a>
+          </div>
+          <div>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-mobile">
+              <span class="sr-only">Comută navigarea</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+        </div>
+    
+        <!-- Navbar Collapse -->
+    
+        <div class="collapse navbar-collapse" id="navbar-mobile"> 
+          <ul class="navbar-nav-mobile">
+            <li class="active"><a href="about.html">Despre Noi</a></li>
+            <li><a href="projects.html">Portofoliu</a></li>
+            <li><a href="contacts.html">Contacte</a></li>
+            <li>
+              <a href="#">Română<i class="fa fa-angle-down"></i></a>
+              <ul>
+                <li><a href="#" onclick="switchLanguage('ru')">Русский</a></li>
+                <li><a href="#" onclick="switchLanguage('en')">English</a></li>
+                <li><a href="#" onclick="switchLanguage('de')">Deutsch</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav> 
+    </header>
+
+  <!-- Layout -->
+
+  <div class="layout">
+    
+    <!-- Home -->
+    
+    <main class="main main-inner main-project" style="background-image:url('img/bg/project.jpg');" data-stellar-background-ratio="0.6">
+      <div class="container">
+        <header class="main-header">
+          <h1>Project in Paris</h1>
+          <div class="project-title-info">
+            <div class="project-info-item"><span class="text-primary">Client</span>: Modernize ltd.</div>
+            <div class="project-info-item"><span class="text-primary">Scale:</span> 3500 km<sup>2</sup></div>
+          </div>
+        </header>
+      </div>
+
+      <!-- Lines -->
+
+      <div class="page-lines">
+        <div class="container">
+          <div class="col-line col-xs-4">
+            <div class="line"></div>
+          </div>
+          <div class="col-line col-xs-4">
+            <div class="line"></div>
+          </div>
+          <div class="col-line col-xs-4">
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="content">   
+      
+      <section class="project-details">
+        <div class="container">
+          <div class="project-details-item">
+            <div class="row">
+              <div class="project-details-info wow fadeInLeft">
+                <h3 class="project-details-title">
+                  Project description<br> is here #1
+                </h3>
+                <p class="project-details-descr">It is a good idea to think of your PC as an office. It stores files, programs, pictures. 
+                This can be compared to an actual office’s files, machines and decorations. 
+                The operating system is the boss. With this image in mind, think of an office you’ve visited that was slow and inefficient.</p>
+              </div>
+              <div class="project-details-img col-md-8 col-md-offset-4">
+                <img alt="" class="img-responsive" src="../img/projects/1-780x668.jpg">
+              </div>
+            </div>
+          </div>
+          <div class="project-details-item">
+            <div class="row">
+              <div class="project-details-info wow fadeInRight">
+                <h3 class="project-details-title">
+                  Project description<br> is here #2
+                </h3>
+                <p class="project-details-descr">It is a good idea to think of your PC as an office. It stores files, programs, pictures. 
+                This can be compared to an actual office’s files, machines and decorations. 
+                The operating system is the boss. With this image in mind, think of an office you’ve visited that was slow and inefficient.</p>
+              </div>
+              <div class="project-details-img col-md-8">
+                <img alt="" class="img-responsive" src="img/projects/2-780x668.jpg">
+              </div>
+            </div>
+          </div>
+          <div class="project-details-item">
+            <div class="row">
+              <div class="project-details-info wow fadeInLeft">
+                <h3 class="project-details-title">
+                  Project description<br> is here #3
+                </h3>
+                <p class="project-details-descr">It is a good idea to think of your PC as an office. It stores files, programs, pictures. 
+                This can be compared to an actual office’s files, machines and decorations. 
+                The operating system is the boss. With this image in mind, think of an office you’ve visited that was slow and inefficient.</p>
+              </div>
+              <div class="project-details-img col-md-8 col-md-offset-4">
+                <img alt="" class="img-responsive" src="img/projects/3-780x668.jpg">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <header class="section-header" style="margin-bottom: 5rem;">
+        <h2 class="section-title"><span class="text-primary">Progresul</span> proiectului</h2>
+      </header>
+
+      <div class="desktop-agisoft" style="display: flex; justify-content: center;">
+        <iframe src="https://cloud.agisoft.com/embedded/projects/aabc355d-9f40-46ad-b449-f11985a2043e/d77418c0-f4ef-4b61-a778-66fa05803bf9/?autoplay=1&name=1&mode=Full&position=28.745446,46.985508,415.270678&orientation=247.373,-85.476,180.004" 
+          width="1200px" 
+          height="500px" 
+          allow="clipboard-write" 
+          allowfullscreen="allowfullscreen" 
+          style="border: 0"
+          lang="ru"
+          title="MAN_Moldova">
+        </iframe>
+      </div>
+      
+      <!-- Footer -->
+      
+      <footer id="footer" class="footer">     
+        <div class="container">
+          <div class="row-base row">
+            <div class="col-base text-left-md col-md-4">
+              <a href="#" class="brand">
+                <span>
+                  <img style="width: 150px;" src="../logo.png" alt="">
+                </span>
+              </a>
+            </div>
+            <div class="text-center-md col-base col-md-4">
+              <a href="https://scalasoft.md/" class="author-link">
+                by Scala Soft
+              </a>
+            </div>
+            <div class="text-right-md col-base col-md-4">
+              © GOR Architecture 2025. Toate drepturile rezervate.
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <!-- Lines -->
+
+      <div class="page-lines">
+        <div class="container">
+          <div class="col-line col-xs-4">
+            <div class="line"></div>
+          </div>
+          <div class="col-line col-xs-4">
+            <div class="line"></div>
+          </div>
+          <div class="col-line col-xs-4">
+            <div class="line"></div>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- SCRIPTS -->
+
+<script>
+  function switchLanguage(lang) {
+  const supportedLangs = ['en', 'ro', 'ru', 'de'];
+  const currentProjectId = new URLSearchParams(window.location.search).get('id');
+  
+  if (supportedLangs.includes(lang)) {
+    const projectParam = currentProjectId ? `?id=${currentProjectId}` : '';
+    window.location.href = `/${lang}/project.html${projectParam}`;
+  } else {
+    const projectParam = currentProjectId ? `?id=${currentProjectId}` : '';
+    window.location.href = `/en/project.html${projectParam}`;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const userLang = navigator.language || navigator.userLanguage;
+  const lang = userLang.split('-')[0];
+  const supportedLangs = ['en', 'ro', 'ru', 'de'];
+  const currentPath = window.location.pathname;
+  const currentProjectId = new URLSearchParams(window.location.search).get('id');
+
+  // Only auto-redirect if we're on the root project page without language prefix
+  if (currentPath === "/project.html" || currentPath === "/") {
+    const targetLang = supportedLangs.includes(lang) ? lang : 'en';
+    const projectParam = currentProjectId ? `?id=${currentProjectId}` : '';
+    window.location.href = `/${targetLang}/project.html${projectParam}`;
+  }
+});
+
+class ProjectLoader {
+  constructor() {
+    this.currentLanguage = this.detectLanguage();
+    this.projectId = this.getProjectId();
+    this.translations = null;
+    this.projectsData = null;
+    this.loadProject();
+  }
+
+  detectLanguage() {
+    const path = window.location.pathname;
+    const langMatch = path.match(/\/(de|en|ro|ru)\//);
+    return langMatch ? langMatch[1] : 'en';
+  }
+
+  getProjectId() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('id');
+  }
+
+  async loadProject() {
+    if (!this.projectId) {
+      this.showError('Project ID not found');
+      return;
+    }
+
+    try {
+      // Try to load the language-specific JSON file first
+      let response;
+      let data;
+      
+      try {
+        response = await fetch(`/data/projects-${this.currentLanguage}.json`);
+        if (!response.ok) throw new Error('Language file not found');
+        data = await response.json();
+      } catch (error) {
+        // Fallback to embedded data or single multilingual file
+        console.warn(`Language file not found for ${this.currentLanguage}, using embedded data`);
+      }
+      
+      let project, translations;
+      
+      // Handle both single language files and multilingual structure
+      if (data[this.currentLanguage]) {
+        // Multilingual structure
+        project = data[this.currentLanguage].projects[this.projectId];
+        translations = data[this.currentLanguage].translations;
+      } else if (data.projects && data.translations) {
+        // Single language structure
+        project = data.projects[this.projectId];
+        translations = data.translations;
+      } else {
+        throw new Error('Invalid data structure');
+      }
+      
+      if (!project) {
+        this.showError('Project not found');
+        return;
+      }
+
+      this.projectsData = project;
+      this.translations = translations;
+      this.renderProject(project, translations);
+    } catch (error) {
+      console.error('Error loading project:', error);
+      this.showError('Error loading project');
+    }
+  }
+
+  renderProject(project, translations) {
+    // Update main header
+    const headerElement = document.querySelector('.main-header h1');
+    if (headerElement) {
+      headerElement.textContent = project.title;
+    }
+    
+    // Update project info
+    const infoItems = document.querySelectorAll('.project-info-item');
+    if (infoItems.length >= 2) {
+      infoItems[0].innerHTML = `<span class="text-primary">${translations.client}</span>: ${project.client}`;
+      infoItems[1].innerHTML = `<span class="text-primary">${translations.scale}:</span> ${project.scale}`;
+    }
+    
+    // Update background image
+    const mainSection = document.querySelector('.main-project');
+    if (mainSection && project.backgroundImage) {
+      mainSection.style.backgroundImage = `url('${project.backgroundImage}')`;
+    }
+    
+    // Update project sections
+    this.renderProjectSections(project.sections);
+    
+    // Update page title
+    document.title = `${project.title} - ${translations.projectDescription}`;
+  }
+
+  renderProjectSections(sections) {
+    const container = document.querySelector('.project-details .container');
+    if (!container) {
+      console.error('Project details container not found');
+      return;
+    }
+    
+    container.innerHTML = '';
+    
+    sections.forEach((section, index) => {
+      const alignmentClass = section.alignment === 'right' ? 'fadeInRight' : 'fadeInLeft';
+      const offsetClass = section.alignment === 'right' ? '' : 'col-md-offset-4';
+      const imageOrderClass = section.alignment === 'right' ? 'col-md-8' : `col-md-8 ${offsetClass}`;
+      
+      const sectionHTML = `
+        <div class="project-details-item">
+          <div class="row">
+            <div class="project-details-info wow ${alignmentClass}">
+              <h3 class="project-details-title">${section.title}</h3>
+              <p class="project-details-descr">${section.description}</p>
+            </div>
+            <div class="project-details-img ${imageOrderClass}">
+              <img alt="${section.title}" class="img-responsive" src="${section.image}">
+            </div>
+          </div>
+        </div>
+      `;
+      
+      container.innerHTML += sectionHTML;
+    });
+  }
+
+  showError(message) {
+    const container = document.querySelector('.project-details .container');
+    if (container) {
+      container.innerHTML = `<div class="error-message"><h3>Error</h3><p>${message}</p></div>`;
+    } else {
+      console.error('Error:', message);
+    }
+  }
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  new ProjectLoader();
+});
+</script>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/smoothscroll.js"></script>
+<script src="../js/jquery.validate.min.js"></script>
+<script src="../js/wow.min.js"></script>
+<script src="../js/jquery.stellar.min.js"></script>
+<script src="../js/jquery.magnific-popup.js"></script>
+<script src="../js/owl.carousel.min.js"></script>
+<script src="../js/interface.js"></script> 
+</body>
+</html>

@@ -1,0 +1,61 @@
+{ 
+    "translations": {
+      "client": "Клиент",
+      "scale": "Масштаб",
+      "projectDescription": "Описание проекта"
+    },
+    "projects": {
+      "medical-center": {
+        "title": "Медицинский центр",
+        "client": "Modernize GmbH",
+        "scale": "3500 м²",
+        "backgroundImage": "../img/projects/medical-center/1.jpg",
+        "sections": [
+          {
+            "title": "Описание проекта здесь #1",
+            "description": "Это хорошая идея...",
+            "image": "../img/projects/medical-center/1.jpg",
+            "alignment": "left"
+          },
+          {
+            "title": "Описание проекта здесь #2",
+            "description": "Это хорошая идея...",
+            "image": "../img/projects/medical-center/3.jpg",
+            "alignment": "right"
+          },
+          {
+            "title": "Описание проекта здесь #3",
+            "description": "Это хорошая идея...",
+            "image": "../img/projects/medical-center/5.jpg",
+            "alignment": "left"
+          }
+        ]
+      },
+      "man-service": {
+        "title": "MAN Service Moldova",
+        "client": "Modernize GmbH",
+        "scale": "3500 м²",
+        "backgroundImage": "../img/projects/man-service/1.png",
+        "sections": [
+          {
+            "title": "Описание проекта здесь #1",
+            "description": "Это хорошая идея...",
+            "image": "../img/projects/man-service/1.png",
+            "alignment": "left"
+          },
+          {
+            "title": "Описание проекта здесь #2",
+            "description": "Это хорошая идея...",
+            "image": "../img/projects/man-service/5.png",
+            "alignment": "right"
+          },
+          {
+            "title": "Описание проекта здесь #3",
+            "description": "Это хорошая идея...",
+            "image": "../img/projects/man-service/8.png",
+            "alignment": "left"
+          }
+        ]
+      }
+    }
+}

@@ -1,0 +1,332 @@
+@media (min-width: 1800px) {
+    .container {
+        max-width: 1700px;
+    }
+}
+@media (min-width: 1700px) {
+    .container {
+        max-width: 1600px;
+    }
+}
+@media (min-width: 1560px) {
+    .container {
+        max-width: 1460px;
+    }
+}
+@media (max-width: 1700px) {
+}
+@media (max-width: 1560px) {
+}
+@media (max-width: 1400px) {
+    body {
+        font-size: 14px;
+    }
+    .banner-content {
+        font-size: 18px;
+    }
+}
+@media (max-width: 1380px) {
+    .banner-content {
+        font-size: 16px;
+    }
+}
+@media (max-width: 1260px) {
+}
+@media (max-width: 1200px) {
+    .banner-title {
+        font-size: 60px;
+    }
+    .navigation .container {
+        max-width: 100%;
+    }
+}
+@media (max-width: 1170px) {
+    .navigation-links a {
+        margin: 0 15px;
+    }
+    .main .main-banner-titles h5 {
+        font-size: 16px;
+        font-weight: 300;
+    }
+    .main-banner-play {
+        width: 140px;
+        height: 140px;
+    }
+    .contacts .col-md-4 {
+        width: 50%;
+    }
+    .contacts .col-md-8 {
+        width: 50%;
+    }
+    .navigation-consult .btn {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+}
+@media (max-width: 1070px) {
+}
+@media (max-width: 993px) {
+    body {
+        font-size: 13px;
+    }
+    .navigation {
+        display: none;
+    }
+    .mobile-navigation {
+        display: flex;
+    }
+    .main-banner {
+        height: calc(100vh - 60px);
+    }
+    .main .col-md-7 {
+        width: 100%;
+    }
+    .main .col-md-5 {
+        display: none;
+    }
+    .main-banner h1 {
+        font-size: 7vw;
+    }
+    .banner-title {
+        font-size: 42px;
+        letter-spacing: 5.4px;
+        line-height: 47px;
+    }
+    .about .section-title {
+        font-size: 34px;
+        letter-spacing: 2px;
+        line-height: 36px;
+    }
+    .anchor {
+        height: 60px;
+    }
+    .section-title {
+        font-size: 35px;
+        line-height: 38px;
+    }
+    .portfolio-page {
+        margin-top: 75px;
+    }
+    .visualisation-title {
+        font-size: 32px;
+    }
+    .services .col-md-3 {
+        width: 50%;
+    }
+    .faq .faq-title {
+        font-size: 32px;
+    }
+    .faq .col-md-4 {
+        width: 100%;
+    }
+    .faq .col-md-4 br {
+        display: none;
+    }
+    .faq .col-md-8 {
+        width: 100%;
+    }
+    .accordion-button {
+        font-size: 16px !important;
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+    }
+    .partners-items {
+        gap: 15px;
+        padding: 0;
+        justify-content: space-evenly;
+    }
+    .partners-items img {
+        max-width: 130px;
+    }
+    .contacts .col-md-4 {
+        width: 50%;
+    }
+    .contacts .col-md-8 {
+        width: 50%;
+    }
+    .contacts-title {
+        font-size: 32px;
+    }
+    .contacts-title br {
+        display: none;
+    }
+    .contacts-item {
+        font-size: 20px;
+    }
+    #visualisation {
+        height: 75px;
+    }
+    .service-item {
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+    .contacts .btn {
+        margin-top: 5px;
+    }
+}
+@media (max-width: 768px) {
+    .navigation-lang-dropdown {
+        top: 30px;
+        left: 10px;
+        right: unset;
+    }
+
+    .main {
+        margin-top: 60px;
+        height: calc(100vh - 50px);
+    }
+    .main-banner {
+        height: calc(100vh - 50px);
+    }
+    .main-banner br {
+        display: none;
+    }
+    .main-banner h1 {
+        font-size: 11vw;
+    }
+    .main-banner {
+        padding: 50px 25px;
+    }
+    .mobile-item {
+        display: flex;
+    }
+
+    .anchor {
+        height: 80px;
+    }
+    .banner {
+        height: unset;
+    }
+    .banner-text {
+        height: unset;
+    }
+    .banner .col-md-5 {
+        display: none;
+    }
+    .mobile-slider {
+        display: block;
+    }
+    .banner-title {
+        margin-bottom: 30px;
+        font-size: 42px;
+        letter-spacing: 5px;
+        line-height: 44px;
+    }
+    .banner-content {
+        margin-bottom: 30px;
+    }
+    .banner-text .btn-outline-dark {
+        width: 100%;
+    }
+    .section-title {
+        font-size: 37px;
+        line-height: 42px;
+    }
+    .about .row {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .about-title {
+        font-size: 42px;
+    }
+    .about-img {
+        margin-bottom: 10px;
+    }
+    .portfolio-item .portfolio-image-vertical {
+        height: 550px;
+    }
+    .portfolio-item-title {
+        display: flex;
+    }
+    .visualisation-title {
+        font-size: 42px;
+        margin-bottom: 0;
+    }
+    .visualisation-title br {
+        display: none;
+    }
+    .visualisation .btn {
+        display: none;
+    }
+    .services .col-md-3 {
+        width: 100%;
+    }
+    .service-item {
+        margin-bottom: 35px;
+    }
+    .beer-title {
+        font-size: 9vw;
+    }
+    #slider img {
+        height: 50vh;
+    }
+    .services .col-md-5 {
+        display: none;
+    }
+    .contacts .col-md-4 {
+        width: 100%;
+    }
+    .contacts .col-md-8 {
+        width: 100%;
+    }
+    #map {
+        margin-top: 50px;
+    }
+    .footer {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        gap: 5px;
+        height: unset;
+        padding: 10px 0;
+    }
+    .footer-copyrights {
+        width: 100%;
+        text-align: center;
+    }
+    .footer-social {
+        width: 100%;
+        text-align: center;
+    }
+    .footer-author {
+        width: 100%;
+        text-align: center;
+    }
+    #consultationModal .modal-dialog {
+        margin: 25px;
+    }
+    .portfolio-detail-main-title {
+        font-size: 32px;
+    }
+    .portfolio-page {
+        margin-top: 80px;
+    }
+    .portfolio-page-title {
+        font-size: 32px;
+    }
+    .portfolio-filter-item {
+        padding: 5px 30px;
+    }
+    #consultationModal .modal-body {
+        padding: 35px 20px;
+    }
+    .portfolio-detail-page .main-slider {
+        margin-bottom: 30px;
+    }
+}
+@media (max-width: 600px) {
+    .main-banner-links {
+        flex-direction: column-reverse;
+    }
+    .main-banner-play {
+        margin-bottom: 95px;
+    }
+    .beer-title {
+        display: none;
+    }
+    .footer-items {
+        flex-direction: column;
+    }
+}
+@media (max-width: 500px) {
+}

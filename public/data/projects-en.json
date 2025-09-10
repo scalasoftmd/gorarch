@@ -1,0 +1,37 @@
+{
+    "translations": {
+      "client": "Client",
+      "scale": "Scale",
+      "projectDescription": "Project Description"
+    },
+    "projects": {
+      "medical-center": {
+        "title": "Medical Center",
+        "client": "Modernize GmbH",
+        "scale": "3500 m²",
+        "backgroundImage": "../img/projects/medical-center/1.jpg",
+        "sections": [
+          {
+            "title": "Project description is here #1",
+            "description": "It's a good idea...",
+            "image": "../img/projects/medical-center/1.jpg",
+            "alignment": "left"
+          }
+        ]
+      },
+      "man-service": {
+        "title": "MAN Service Moldova",
+        "client": "Modernize GmbH",
+        "scale": "3500 m²",
+        "backgroundImage": "../img/projects/man-service/1.png",
+        "sections": [
+          {
+            "title": "Project description is here #1",
+            "description": "It's a good idea...",
+            "image": "../img/projects/man-service/1.png",
+            "alignment": "left"
+          }
+        ]
+      }
+    }
+  }

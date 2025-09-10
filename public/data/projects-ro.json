@@ -1,0 +1,61 @@
+{
+    "translations": {
+      "client": "Client",
+      "scale": "Dimensiune",
+      "projectDescription": "Descrierea proiectului"
+    },
+    "projects": {
+      "medical-center": {
+        "title": "Centru Medical",
+        "client": "Modernize GmbH",
+        "scale": "3500 m²",
+        "backgroundImage": "../img/projects/medical-center/1.jpg",
+        "sections": [
+          {
+            "title": "Descrierea proiectului este aici #1",
+            "description": "Este o idee bună...",
+            "image": "../img/projects/medical-center/1.jpg",
+            "alignment": "left"
+          },
+          {
+            "title": "Descrierea proiectului este aici #2",
+            "description": "Este o idee bună...",
+            "image": "../img/projects/medical-center/3.jpg",
+            "alignment": "right"
+          },
+          {
+            "title": "Descrierea proiectului este aici #3",
+            "description": "Este o idee bună...",
+            "image": "../img/projects/medical-center/5.jpg",
+            "alignment": "left"
+          }
+        ]
+      },
+      "man-service": {
+        "title": "MAN Service Moldova",
+        "client": "Modernize GmbH",
+        "scale": "3500 m²",
+        "backgroundImage": "../img/projects/man-service/1.png",
+        "sections": [
+          {
+            "title": "Descrierea proiectului este aici #1",
+            "description": "Este o idee bună...",
+            "image": "../img/projects/man-service/1.png",
+            "alignment": "left"
+          },
+          {
+            "title": "Descrierea proiectului este aici #2",
+            "description": "Este o idee bună...",
+            "image": "../img/projects/man-service/5.png",
+            "alignment": "right"
+          },
+          {
+            "title": "Descrierea proiectului este aici #3",
+            "description": "Este o idee bună...",
+            "image": "../img/projects/man-service/8.png",
+            "alignment": "left"
+          }
+        ]
+      }
+    }
+}
