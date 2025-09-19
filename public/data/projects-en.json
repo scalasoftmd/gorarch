@@ -1,37 +1,159 @@
 {
-    "translations": {
-      "client": "Client",
-      "scale": "Scale",
-      "projectDescription": "Project Description"
+  "translations": {
+    "client": "Client",
+    "scale": "Scale",
+    "projectDescription": "Project description",
+    "location": "Location",
+    "objectType": "Object type",
+    "purpose": "Purpose",
+    "floors": "Floors",
+    "facades": "Facades",
+    "features": "Features",
+    "status": "Status",
+    "map": "Progress map (real-time construction tracking)"
+  },
+  "projects": {
+    "man-service": {
+      "title": "MAN Service Moldova",
+      "client": "Modernize GmbH",
+      "scale": "3500 m²",
+      "location": "Chisinau municipality, Durlești city",
+      "objectType": "MAN Service Center",
+      "purpose": "Industrial facility",
+      "floors": "2 floors",
+      "facades": "Combination of panoramic glazing and sandwich panels",
+      "features": "First MAN service center in Moldova",
+      "status": "In progress",
+      "map": "https://cloud.agisoft.com/embedded/projects/aabc355d-9f40-46ad-b449-f11985a2043e/d77418c0-f4ef-4b61-a778-66fa05803bf9/?autoplay=1&name=1&mode=Full&position=28.745446,46.985508,415.270678&orientation=247.373,-85.476,180.004",
+      "backgroundImage": "../img/projects/man-service/1.png",
+      "sections": [
+        {
+          "title": "Functionality of the facility",
+          "description": "The building is designed for servicing MAN trucks, including repair zones and office spaces.",
+          "image": "../img/projects/man-service/1.png",
+          "alignment": "left"
+        },
+        {
+          "title": "Architectural solutions",
+          "description": "The facades combine modern panoramic glazing and energy-efficient sandwich panels.",
+          "image": "../img/projects/man-service/5.png",
+          "alignment": "right"
+        },
+        {
+          "title": "Project significance",
+          "description": "This is the first specialized center in Moldova, setting new standards for MAN service.",
+          "image": "../img/projects/man-service/8.png",
+          "alignment": "left"
+        }
+      ]
     },
-    "projects": {
-      "medical-center": {
-        "title": "Medical Center",
-        "client": "Modernize GmbH",
-        "scale": "3500 m²",
-        "backgroundImage": "../img/projects/medical-center/1.jpg",
-        "sections": [
-          {
-            "title": "Project description is here #1",
-            "description": "It's a good idea...",
-            "image": "../img/projects/medical-center/1.jpg",
-            "alignment": "left"
-          }
-        ]
-      },
-      "man-service": {
-        "title": "MAN Service Moldova",
-        "client": "Modernize GmbH",
-        "scale": "3500 m²",
-        "backgroundImage": "../img/projects/man-service/1.png",
-        "sections": [
-          {
-            "title": "Project description is here #1",
-            "description": "It's a good idea...",
-            "image": "../img/projects/man-service/1.png",
-            "alignment": "left"
-          }
-        ]
-      }
+    "medical-center": {
+      "title": "Medical Center",
+      "client": "Modernize GmbH",
+      "scale": "3200 m²",
+      "location": "Chisinau city, Buiucani district",
+      "objectType": "Reconstruction with an addition of 2 floors",
+      "purpose": "Multifunctional center",
+      "floors": "5 levels (basement + 4 above-ground floors)",
+      "facades": "Ventilated porcelain stoneware panels, panoramic glazing",
+      "features": "Open floor layouts for flexible use",
+      "status": "In progress",
+      "map": "",
+      "sections": [
+        {
+          "title": "Building renovation",
+          "description": "The project provides for the reconstruction of an existing building with the addition of two floors.",
+          "image": "../img/projects/medical-center/1.jpg",
+          "alignment": "left"
+        },
+        {
+          "title": "Modern facades",
+          "description": "The facade is finished with porcelain stoneware and panoramic glazing, emphasizing a modern style.",
+          "image": "../img/projects/medical-center/3.jpg",
+          "alignment": "right"
+        }
+      ]
+    },
+    "estera-2": {
+      "title": "RESIDENTIAL COMPLEX ESTERA II",
+      "client": "Modernize GmbH",
+      "scale": "23,000 m²",
+      "location": "Chisinau municipality, Durlești city",
+      "objectType": "New construction",
+      "purpose": "Mid-rise residential building",
+      "floors": "7 levels",
+      "facades": "Combination of porcelain stoneware panels, thermo-wood, and plaster",
+      "features": "2-level underground parking and modern residential courtyard",
+      "status": "In progress",
+      "map": "",
+      "sections": [
+        {
+          "title": "Residential complex",
+          "description": "The building is designed for comfortable living with spacious apartments and modern amenities.",
+          "image": "../img/projects/estera-2/1.jpg",
+          "alignment": "left"
+        },
+        {
+          "title": "Innovative solutions",
+          "description": "Special attention is paid to the facades using modern materials.",
+          "image": "../img/projects/estera-2/2.jpg",
+          "alignment": "right"
+        }
+      ]
+    },
+    "orhei-apartments": {
+      "title": "RESIDENTIAL COMPLEX ORHEI",
+      "client": "Modernize GmbH",
+      "scale": "7000 m²",
+      "location": "Orhei municipality, Nistrena village",
+      "objectType": "New construction",
+      "purpose": "Mid-rise residential building",
+      "floors": "7 levels",
+      "facades": "Combination of metal panels and plaster",
+      "features": "Underground parking and commercial spaces on the first floor",
+      "status": "Completed",
+      "map": "",
+      "sections": [
+        {
+          "title": "Living space",
+          "description": "The project provides apartments with optimal layouts and modern engineering systems.",
+          "image": "../img/projects/orhei-apartments/1.jpg",
+          "alignment": "left"
+        },
+        {
+          "title": "Functionality",
+          "description": "The first floor of the building is reserved for commercial spaces, creating convenience for residents.",
+          "image": "../img/projects/orhei-apartments/2.jpg",
+          "alignment": "right"
+        }
+      ]
+    },
+    "carvidon": {
+      "title": "CARVIDON AGRICULTURAL MACHINERY COMPLEX",
+      "client": "Modernize GmbH",
+      "scale": "1600 m²",
+      "location": "Chisinau municipality, Stăuceni city",
+      "objectType": "Kubota-Carvidon multifunctional complex",
+      "purpose": "Industrial facility",
+      "floors": "3 floors",
+      "facades": "Combination of industrial sandwich panels and clinker facades",
+      "features": "Full cycle of Kubota agricultural machinery service in one place",
+      "status": "Completed",
+      "map": "",
+      "sections": [
+        {
+          "title": "Multifunctionality",
+          "description": "The complex combines demonstration, service, and storage of premium-class agricultural machinery.",
+          "image": "../img/projects/carvidon/1.jpg",
+          "alignment": "left"
+        },
+        {
+          "title": "Full service",
+          "description": "The project is designed to provide all stages of customer service in one space.",
+          "image": "../img/projects/carvidon/2.jpg",
+          "alignment": "right"
+        }
+      ]
     }
   }
+}

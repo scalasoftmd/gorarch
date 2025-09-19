@@ -1,61 +1,159 @@
-{ 
-    "translations": {
-      "client": "Клиент",
-      "scale": "Масштаб",
-      "projectDescription": "Описание проекта"
+{
+  "translations": {
+    "client": "Клиент",
+    "scale": "Площадь",
+    "projectDescription": "Описание проекта",
+    "location": "Локация",
+    "objectType": "Тип объекта",
+    "purpose": "Назначение",
+    "floors": "Этажность",
+    "facades": "Фасады",
+    "features": "Особенности",
+    "status": "Статус",
+    "map": "Карта прогресса (онлайн-отслеживание строительства)"
+  },
+  "projects": {
+    "man-service": {
+      "title": "MAN Service Moldova",
+      "client": "Modernize GmbH",
+      "scale": "3500 м²",
+      "location": "мун. Кишинёв, г. Дурлешты",
+      "objectType": "Сервисный центр MAN",
+      "purpose": "Промышленный объект",
+      "floors": "2 этажа",
+      "facades": "Комбинация панорамного остекления и сэндвич-панелей",
+      "features": "Первый сервисный центр MAN в Молдове",
+      "status": "В процессе",
+      "map": "https://cloud.agisoft.com/embedded/projects/aabc355d-9f40-46ad-b449-f11985a2043e/d77418c0-f4ef-4b61-a778-66fa05803bf9/?autoplay=1&name=1&mode=Full&position=28.745446,46.985508,415.270678&orientation=247.373,-85.476,180.004",
+      "backgroundImage": "../img/projects/man-service/1.png",
+      "sections": [
+        {
+          "title": "Функциональность объекта",
+          "description": "Здание предназначено для обслуживания грузовиков MAN, включая ремонтные зоны и офисные помещения.",
+          "image": "../img/projects/man-service/1.png",
+          "alignment": "left"
+        },
+        {
+          "title": "Архитектурные решения",
+          "description": "Фасады сочетают современное панорамное остекление и энергоэффективные сэндвич-панели.",
+          "image": "../img/projects/man-service/5.png",
+          "alignment": "right"
+        },
+        {
+          "title": "Значимость проекта",
+          "description": "Это первый специализированный центр в Молдове, задающий новые стандарты для обслуживания MAN.",
+          "image": "../img/projects/man-service/8.png",
+          "alignment": "left"
+        }
+      ]
     },
-    "projects": {
-      "medical-center": {
-        "title": "Медицинский центр",
-        "client": "Modernize GmbH",
-        "scale": "3500 м²",
-        "backgroundImage": "../img/projects/medical-center/1.jpg",
-        "sections": [
-          {
-            "title": "Описание проекта здесь #1",
-            "description": "Это хорошая идея...",
-            "image": "../img/projects/medical-center/1.jpg",
-            "alignment": "left"
-          },
-          {
-            "title": "Описание проекта здесь #2",
-            "description": "Это хорошая идея...",
-            "image": "../img/projects/medical-center/3.jpg",
-            "alignment": "right"
-          },
-          {
-            "title": "Описание проекта здесь #3",
-            "description": "Это хорошая идея...",
-            "image": "../img/projects/medical-center/5.jpg",
-            "alignment": "left"
-          }
-        ]
-      },
-      "man-service": {
-        "title": "MAN Service Moldova",
-        "client": "Modernize GmbH",
-        "scale": "3500 м²",
-        "backgroundImage": "../img/projects/man-service/1.png",
-        "sections": [
-          {
-            "title": "Описание проекта здесь #1",
-            "description": "Это хорошая идея...",
-            "image": "../img/projects/man-service/1.png",
-            "alignment": "left"
-          },
-          {
-            "title": "Описание проекта здесь #2",
-            "description": "Это хорошая идея...",
-            "image": "../img/projects/man-service/5.png",
-            "alignment": "right"
-          },
-          {
-            "title": "Описание проекта здесь #3",
-            "description": "Это хорошая идея...",
-            "image": "../img/projects/man-service/8.png",
-            "alignment": "left"
-          }
-        ]
-      }
+    "medical-center": {
+      "title": "Медицинский центр",
+      "client": "Modernize GmbH",
+      "scale": "3200 м²",
+      "location": "г. Кишинёв, р-н Буюкань",
+      "objectType": "Реконструкция с надстройкой 2 этажей",
+      "purpose": "Многофункциональный центр",
+      "floors": "5 уровней (цоколь + 4 надземных этажа)",
+      "facades": "Вентилируемые панели из керамогранита, панорамное остекление",
+      "features": "Открытые планировки для гибкого использования",
+      "status": "В процессе",
+      "map": "",
+      "sections": [
+        {
+          "title": "Реконструкция здания",
+          "description": "Проект предусматривает реконструкцию существующего здания с надстройкой двух этажей.",
+          "image": "../img/projects/medical-center/1.jpg",
+          "alignment": "left"
+        },
+        {
+          "title": "Современные фасады",
+          "description": "Фасад отделан керамогранитом и панорамным остеклением, подчеркивающим современный стиль.",
+          "image": "../img/projects/medical-center/3.jpg",
+          "alignment": "right"
+        }
+      ]
+    },
+    "estera-2": {
+      "title": "ЖИЛОЙ КОМПЛЕКС ESTERA II",
+      "client": "Modernize GmbH",
+      "scale": "23 000 м²",
+      "location": "мун. Кишинёв, г. Дурлешты",
+      "objectType": "Новое строительство",
+      "purpose": "Среднеэтажный жилой дом",
+      "floors": "7 уровней",
+      "facades": "Комбинация панелей из керамогранита, термодерева и штукатурки",
+      "features": "2-уровневая подземная парковка и современный жилой двор",
+      "status": "В процессе",
+      "map": "",
+      "sections": [
+        {
+          "title": "Жилой комплекс",
+          "description": "Здание спроектировано для комфортного проживания с просторными квартирами и современными удобствами.",
+          "image": "../img/projects/estera-2/1.jpg",
+          "alignment": "left"
+        },
+        {
+          "title": "Инновационные решения",
+          "description": "Особое внимание уделено фасадам с использованием современных материалов.",
+          "image": "../img/projects/estera-2/2.jpg",
+          "alignment": "right"
+        }
+      ]
+    },
+    "orhei-apartments": {
+      "title": "ЖИЛОЙ КОМПЛЕКС ORHEI",
+      "client": "Modernize GmbH",
+      "scale": "7000 м²",
+      "location": "мун. Орхей, с. Нистрена",
+      "objectType": "Новое строительство",
+      "purpose": "Среднеэтажный жилой дом",
+      "floors": "7 уровней",
+      "facades": "Комбинация металлических панелей и штукатурки",
+      "features": "Подземная парковка и коммерческие помещения на первом этаже",
+      "status": "Завершён",
+      "map": "",
+      "sections": [
+        {
+          "title": "Жилое пространство",
+          "description": "Проект предусматривает квартиры с оптимальными планировками и современными инженерными системами.",
+          "image": "../img/projects/orhei-apartments/1.jpg",
+          "alignment": "left"
+        },
+        {
+          "title": "Функциональность",
+          "description": "Первый этаж здания отведён под коммерческие помещения, создавая удобство для жителей.",
+          "image": "../img/projects/orhei-apartments/2.jpg",
+          "alignment": "right"
+        }
+      ]
+    },
+    "carvidon": {
+      "title": "АГРОКОМПЛЕКС CARVIDON",
+      "client": "Modernize GmbH",
+      "scale": "1600 м²",
+      "location": "мун. Кишинёв, г. Ставчены",
+      "objectType": "Многофункциональный комплекс Kubota-Carvidon",
+      "purpose": "Промышленный объект",
+      "floors": "3 этажа",
+      "facades": "Комбинация промышленных сэндвич-панелей и фасадов из клинкера",
+      "features": "Полный цикл обслуживания сельхозтехники Kubota в одном месте",
+      "status": "Завершён",
+      "map": "",
+      "sections": [
+        {
+          "title": "Многофункциональность",
+          "description": "Комплекс объединяет демонстрацию, обслуживание и хранение сельскохозяйственной техники премиум-класса.",
+          "image": "../img/projects/carvidon/1.jpg",
+          "alignment": "left"
+        },
+        {
+          "title": "Полный сервис",
+          "description": "Проект создан для предоставления всех этапов обслуживания клиентов в одном пространстве.",
+          "image": "../img/projects/carvidon/2.jpg",
+          "alignment": "right"
+        }
+      ]
     }
+  }
 }
