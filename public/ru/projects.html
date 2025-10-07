@@ -1,150 +1,152 @@
 <!DOCTYPE HTML>
 <html lang="ru">
+
 <head>
-<meta  charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GOR ARCHITECTURE</title> 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GOR ARCHITECTURE</title>
 
-<!-- Favicons -->
-<link rel="shortcut icon" type="image/png" href="../favicon.png">
-<link rel="apple-touch-icon" href="../apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="72x72" href="../apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="114x114" href="../apple-touch-icon-114x114.png">
+  <!-- Favicons -->
+  <link rel="shortcut icon" type="image/png" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="../apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="../apple-touch-icon-114x114.png">
 
-<!-- Styles -->
-<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-<link href="../css/style.css" rel="stylesheet" media="screen">
+  <!-- Styles -->
+  <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet" media="screen">
 </head>
-<body>
-  
-    <!-- Loader -->
 
-    <div class="loader">
-      <div class="page-lines">
-        <div class="container">
-          <div class="col-line col-xs-4">
-            <div class="line"></div>
-          </div>
-          <div class="col-line col-xs-4">
-            <div class="line"></div>
-          </div>
-          <div class="col-line col-xs-4">
-            <div class="line"></div>
-            <div class="line"></div>
-          </div>
+<body>
+
+  <!-- Loader -->
+
+  <div class="loader">
+    <div class="page-lines">
+      <div class="container">
+        <div class="col-line col-xs-4">
+          <div class="line"></div>
         </div>
-      </div>
-      <div class="loader-brand"> 
-        <div class="sk-folding-cube">
-          <div class="sk-cube1 sk-cube"></div>
-          <div class="sk-cube2 sk-cube"></div>
-          <div class="sk-cube4 sk-cube"></div>
-          <div class="sk-cube3 sk-cube"></div>
+        <div class="col-line col-xs-4">
+          <div class="line"></div>
+        </div>
+        <div class="col-line col-xs-4">
+          <div class="line"></div>
+          <div class="line"></div>
         </div>
       </div>
     </div>
+    <div class="loader-brand">
+      <div class="sk-folding-cube">
+        <div class="sk-cube1 sk-cube"></div>
+        <div class="sk-cube2 sk-cube"></div>
+        <div class="sk-cube4 sk-cube"></div>
+        <div class="sk-cube3 sk-cube"></div>
+      </div>
+    </div>
+  </div>
 
 
-    <!-- Header -->
+  <!-- Header -->
 
-    <header id="top" class="header-home">
-      <div class="brand-panel">
-        <a href="index.html" class="brand js-target-scroll">
-          <span>
-            <img style="width: 140px; margin-left: -10px;" src="../logo.png" alt="">
-          </span>
-        </a>
-        <div style="margin-left: 170px;" class="brand-name">GOR Architecture</div>
+  <header id="top" class="header-home">
+    <div class="brand-panel" style="background-color:transparent">
+      <a href="index.html" class="brand js-target-scroll">
+        <span>
+          <img style="width: 140px; margin-left: -10px;" src="../logo.png" alt="">
+        </span>
+      </a>
+      <div style="margin-left: 170px;" class="brand-name">GOR Architecture</div>
+    </div>
+
+    <!-- Navigation Desctop -->
+
+      <nav class="navbar-desctop visible-md visible-lg">
+        <div class="container">
+          <div style="display: flex; justify-content: space-around; align-items: center;">
+            <div>
+              <a href="index.html" class="brand js-target-scroll">
+                <span>
+                  <img style="width: 150px;" src="../logo.png" alt="">
+                </span>
+              </a>
+            </div>
+            <div>
+              <ul class="navbar-desctop-menu">
+                <li>
+                  <a href="about.html">О Нас</a>
+                </li>
+                <li class="active">
+                  <a href="services.html">Услуги</a>
+                </li>
+                <li>
+                  <a href="projects.html">Портфолио</a>
+                </li>
+                <li>
+                  <a href="contacts.html">Контакты</a>
+                </li>
+                <li><a href="#">Русский</a>
+                  <ul>
+                    <li><a href="#" onclick="switchLanguage('ro')">Română</a></li>
+                    <li><a href="#" onclick="switchLanguage('en')">English</a></li>
+                    <li><a href="#" onclick="switchLanguage('de')">Deutsch</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+    <!-- Navigation Mobile -->
+
+    <nav class="navbar-mobile">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <a href="#top" class="brand js-target-scroll">
+            <span>
+              <img style="width: 140px; margin-left: -10px;" src="../logo.png" alt="">
+            </span>
+          </a>
+        </div>
+        <div>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-mobile">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
       </div>
 
-      <!-- Navigation Desctop -->
-       
-          <nav class="navbar-desctop visible-md visible-lg">
-            <div class="container">
-              <div style="display: flex; justify-content: space-around; align-items: center;">
-                <div>
-                  <a href="index.html" class="brand js-target-scroll">
-                    <span>
-                      <img style="width: 150px;" src="../logo.png" alt="">
-                    </span>
-                  </a>
-                </div>
-                <div>
-                  <ul class="navbar-desctop-menu">
-                    <li>
-                      <a href="about.html">О Нас</a>
-                    </li>
-                    <li>
-                      <a href="services.html">Услуги</a>
-                    </li>
-                    <li class="active">
-                      <a href="projects.html">Портфолио</a>
-                    </li>
-                    <li>
-                      <a href="contacts.html">Контакты</a>
-                    </li>
-                    <li><a href="#">Русский</a>
-                      <ul>
-                        <li><a href="#" onclick="switchLanguage('ro')">Română</a></li>
-                        <li><a href="#" onclick="switchLanguage('en')">English</a></li>
-                        <li><a href="#" onclick="switchLanguage('de')">Deutsch</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </nav>
+      <!-- Navbar Collapse -->
 
-      <!-- Navigation Mobile -->
-
-      <nav class="navbar-mobile">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div>
-            <a href="#top" class="brand js-target-scroll">
-              <span>
-                <img style="width: 140px; margin-left: -10px;" src="../logo.png" alt="">
-              </span>
-            </a>
-          </div>
-          <div>
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-mobile">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Navbar Collapse -->
-
-        <div class="collapse navbar-collapse" id="navbar-mobile"> 
-          <ul class="navbar-nav-mobile">
-            <li><a href="about.html">О Нас</a></li>
-            <li><a href="services.html">Услуги</a></li>
-            <li class="active"><a href="projects.html">Портфолио</a></li>
-            <li><a href="contacts.html">Контакты</a></li>
-            <li>
-              <a href="#">Русский <i class="fa fa-angle-down"></i></a>
-              <ul>
-                <li><a href="#" onclick="switchLanguage('ro')">Română</a></li>
-                <li><a href="#" onclick="switchLanguage('en')">English</a></li>
-                <li><a href="#" onclick="switchLanguage('de')">Deutsch</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav> 
-    </header>
+      <div class="collapse navbar-collapse" id="navbar-mobile">
+        <ul class="navbar-nav-mobile">
+          <li><a href="about.html">О Нас</a></li>
+          <li><a href="services.html">Услуги</a></li>
+          <li class="active"><a href="projects.html">Портфолио</a></li>
+          <li><a href="contacts.html">Контакты</a></li>
+          <li>
+            <a href="#">Русский <i class="fa fa-angle-down"></i></a>
+            <ul>
+              <li><a href="#" onclick="switchLanguage('ro')">Română</a></li>
+              <li><a href="#" onclick="switchLanguage('en')">English</a></li>
+              <li><a href="#" onclick="switchLanguage('de')">Deutsch</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
   <!-- Layout -->
 
   <div class="layout">
-    
+
     <!-- Home -->
-    
+
     <main class="main main-inner main-projects bg-projects" data-stellar-background-ratio="0.6">
       <div class="container">
         <header class="main-header">
@@ -170,146 +172,217 @@
       </div>
     </main>
 
-    <div class="content">   
-    
+    <div class="content">
+
       <!-- Projects -->
 
       <section class="projects">
-        <div class="js-projects-gallery">
-          <div class="row">
-            <div class="project project-light col-sm-6 col-md-4 col-lg-3">
-              <a href="../img/projects/1.jpg" title="Residential care project in Paris">
-                <figure>
-                  <img alt="" src="../img/projects/1.jpg">
-                  <figcaption>
-                    <h3 class="project-title">
-                      Медицинский центр
-                    </h3>
-                    <h4 class="project-category">
-                      Архитектура
-                    </h4>
-                    <div class="project-zoom"></div>
-                  </figcaption>
-                </figure>
-              </a>
-            </div>
-            <div class="project project-light col-sm-6 col-md-4 col-lg-3">
-              <a href="../img/projects/2.jpg" title="Concert hall in New york">
-                <figure>
-                  <img alt="" src="../img/projects/2.jpg">
-                  <figcaption>
-                    <h3 class="project-title">
-                      Исторический объект <br> в Магдебурге
-                    </h3>
-                    <h4 class="project-category">
-                      Архитектура
-                    </h4>
-                    <div class="project-zoom"></div>
-                  </figcaption>
-                </figure>
-              </a>
-            </div>
-            <div class="project col-sm-6 col-md-4 col-lg-3">
-              <a href="../img/projects/3.jpg" title="Modern hotel in London">
-                <figure>
-                  <img alt="" src="../img/projects/3.jpg">
-                  <figcaption>
-                    <h3 class="project-title">
-                      Жилой комплекc<br>Estera II
-                    </h3>
-                    <h4 class="project-category">
-                      Архитектура
-                    </h4>
-                    <div class="project-zoom"></div>
-                  </figcaption>
-                </figure>
-              </a>
-            </div>
-            <div class="project col-sm-6 col-md-4 col-lg-3">
-            </div>
-            <div class="project col-sm-6 col-md-4 col-lg-3">
-              <a href="../img/projects/5.jpg" title="Modern Livingroom in New York">
-                <figure>
-                  <img alt="" src="../img/projects/5.jpg">
-                  <figcaption>
-                    <h3 class="project-title">
-                      Жилой комплекc<br> Орхей
-                    </h3>
-                    <h4 class="project-category">
-                      Архитектура
-                    </h4>
-                    <div class="project-zoom"></div>
-                  </figcaption>
-                </figure>
-              </a>
-            </div>
-            <div class="project project-light col-sm-6 col-md-4 col-lg-3">
-              <a href="../img/projects/6.jpg" title="Observatory plan In moscow">
-                <figure>
-                  <img alt="" src="../img/projects/6.jpg">
-                  <figcaption>
-                    <h3 class="project-title">
-                      Квартира 23
-                    </h3>
-                    <h4 class="project-category">
-                      Архитектура
-                    </h4>
-                    <div class="project-zoom"></div>
-                  </figcaption>
-                </figure>
-              </a>
-            </div>
-            <div class="project col-sm-6 col-md-4 col-lg-3">
-              <a href="../img/projects/7.jpg" title="Townhouse design in Chicago">
-                <figure>
-                  <img alt="" src="../img/projects/7.jpg">
-                  <figcaption>
-                    <h3 class="project-title">
-                      Офис<br> Avalon Club
-                    </h3>
-                    <h4 class="project-category">
-                      Архитектура
-                    </h4>
-                    <div class="project-zoom"></div>
-                  </figcaption>
-                </figure>
-              </a>
-            </div>
-            <div class="project project-light col-sm-6 col-md-4 col-lg-3">
-              <a href="../img/projects/8.jpg" title="National Library in Madrid">
-                <figure>
-                  <img alt="" src="../img/projects/8.jpg">
-                  <figcaption>
-                    <h3 class="project-title">
-                      Комплекс агротехники <br> CARVIDON
-                    </h3>
-                    <h4 class="project-category">
-                      Архитектура
-                    </h4>
-                    <div class="project-zoom"></div>
-                  </figcaption>
-                </figure>
-              </a>
-            </div>
-            <div class="project col-sm-6 col-md-4 col-lg-3">
-              <a href="../img/projects/4.png" title="Modern hotel in London">
-                <figure>
-                  <img alt="" src="../img/projects/4.png">
-                  <figcaption>
-                    <h3 class="project-title">
-                      MAN Service<br>Moldova
-                    </h3>
-                    <h4 class="project-category">
-                      Архитектура
-                    </h4>
-                    <div class="project-zoom"></div>
-                  </figcaption>
-                </figure>
-              </a>
-            </div>
+        <div class="row">
+          <div class="project project-light col-sm-6 col-md-4 col-lg-3">
+            <a href="/ru/project.html?id=medical-center" title="Центр ухода в Париже">
+              <figure>
+                <img alt="Медицинский центр" src="../img/projects/1.jpg">
+                <figcaption>
+                  <h3 class="project-title">
+                    Медицинский центр
+                  </h3>
+                  <h4 class="project-category">
+                    Архитектура
+                  </h4>
+                  <div class="project-zoom"></div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+          <div class="project project-light col-sm-6 col-md-4 col-lg-3">
+            <a href="/ru/project.html?id=man-service" title="MAN Сервис Молдова">
+              <figure>
+                <img alt="MAN Сервис Молдова" src="../img/projects/4.png">
+                <figcaption>
+                  <h3 class="project-title">
+                    MAN Сервис<br>Молдова
+                  </h3>
+                  <h4 class="project-category">
+                    Архитектура
+                  </h4>
+                  <div class="project-zoom"></div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+          <div class="project col-sm-6 col-md-4 col-lg-3">
+            <a href="/ru/project.html?id=estera-2" title="Современный жилой комплекс Estera II">
+              <figure>
+                <img alt="Жилой комплекс Estera II" src="../img/projects/3.jpg">
+                <figcaption>
+                  <h3 class="project-title">
+                    Жилой комплекс<br>Estera II
+                  </h3>
+                  <h4 class="project-category">
+                    Архитектура
+                  </h4>
+                  <div class="project-zoom"></div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+          <div class="project col-sm-6 col-md-4 col-lg-3"></div>
+          <div class="project col-sm-6 col-md-4 col-lg-3">
+            <a href="/ru/project.html?id=orhei-apartments" title="Современный жилой комплекс Орхей">
+              <figure>
+                <img alt="Жилой комплекс Орхей" src="../img/projects/5.jpg">
+                <figcaption>
+                  <h3 class="project-title">
+                    Жилой комплекс<br>Орхей
+                  </h3>
+                  <h4 class="project-category">
+                    Архитектура
+                  </h4>
+                  <div class="project-zoom"></div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+          <div class="project project-light col-sm-6 col-md-4 col-lg-3">
+            <a href="/ru/project.html?id=carvidon" title="Агротехнический комплекс CARVIDON">
+              <figure>
+                <img alt="Агротехнический комплекс CARVIDON" src="../img/projects/8.jpg">
+                <figcaption>
+                  <h3 class="project-title">
+                    Агротехнический комплекс <br> CARVIDON
+                  </h3>
+                  <h4 class="project-category">
+                    Архитектура
+                  </h4>
+                  <div class="project-zoom"></div>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+          <div class="project col-sm-6 col-md-4 col-lg-3">
+            <!-- <a href="../img/projects/7.jpg" title="Офис Avalon Club">
+        <figure>
+          <img alt="Офис Avalon Club" src="../img/projects/7.jpg">
+          <figcaption>
+            <h3 class="project-title">
+              Avalon Club<br>Офис
+            </h3>
+            <h4 class="project-category">
+              Архитектура
+            </h4>
+            <div class="project-zoom"></div>
+          </figcaption>
+        </figure>
+      </a> -->
+          </div>
+          <div class="project project-light col-sm-6 col-md-4 col-lg-3">
+            <!-- <a href="../img/projects/6.jpg" title="Квартира 23">
+        <figure>
+          <img alt="Квартира 23" src="../img/projects/6.jpg">
+          <figcaption>
+            <h3 class="project-title">
+              Квартира 23
+            </h3>
+            <h4 class="project-category">
+              Архитектура
+            </h4>
+            <div class="project-zoom"></div>
+          </figcaption>
+        </figure>
+      </a> -->
+          </div>
+          <div class="project col-sm-6 col-md-4 col-lg-3">
+            <!-- <a href="../img/projects/2.jpg" title="Историческое здание в Магдебурге">
+        <figure>
+          <img alt="Историческое здание" src="../img/projects/2.jpg">
+          <figcaption>
+            <h3 class="project-title">
+              Историческое здание <br> в Магдебурге
+            </h3>
+            <h4 class="project-category">
+              Архитектура
+            </h4>
+            <div class="project-zoom"></div>
+          </figcaption>
+        </figure>
+      </a> -->
           </div>
         </div>
       </section>
+
+      <header class="section-header" style="margin-bottom: 3rem;">
+        <h2 class="section-title"><span class="text-primary">Прогресс</span> проекта</h2>
+      </header>
+
+      <!-- Toggle Button -->
+      <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
+        <button id="toggleInstructions"
+          style="margin-top: 20px; background: none; border: none; 
+                          font-size: 20px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;">
+          <span style="font-weight: 600;">Как пользоваться 3D-просмотрщиком и инструментами</span>
+          <span id="toggleIcon" style="font-weight: bold;">+</span>
+        </button>
+      </div>
+
+
+      <!-- Instructions Section (hidden by default) -->
+      <section id="instructions" style="margin-top: 2rem; padding: 15px; border-radius: 5px; 
+                box-shadow: 0 0 8px rgba(0,0,0,0.1); display: none;">
+        <div style="display: flex; justify-content: center;">
+          <ul style="line-height: 1.6;">
+            <li><strong>Вращение:</strong> Нажмите и удерживайте левую кнопку мыши или коснитесь и перетащите на
+              сенсорных устройствах, чтобы вращать модель.</li>
+            <li><strong>Масштабирование:</strong> Используйте колесо мыши или жест «щипок» на сенсорных экранах для
+              увеличения и уменьшения масштаба.</li>
+            <li><strong>Панорамирование:</strong> Удерживайте правую кнопку мыши или используйте два пальца на сенсорном
+              экране для перемещения вида.</li>
+            <li><strong>Правая боковая панель (свернута по умолчанию):</strong> Нажмите на стрелку справа, чтобы
+              развернуть панель. В ней находятся:
+              <ul>
+                <li><strong>Сравнение:</strong> Просмотр и сравнение разных версий или состояний модели рядом.</li>
+                <li><strong>Презентация:</strong> Режим презентации для создания направленных видов и walkthrough.</li>
+                <li><strong>Настройки сцены:</strong> Регулировка освещения, фона и параметров рендеринга модели.</li>
+                <li><strong>Инструменты выделения:</strong> Используйте режимы «Полигон», «Точка» или «Объект» для
+                  выделения и изменения частей модели.</li>
+              </ul>
+            </li>
+            <li><strong>Кнопка рабочего пространства (слева):</strong> Нажмите, чтобы открыть панель рабочего
+              пространства. Здесь можно:
+              <ul>
+                <li><strong>Слои:</strong> Просматривать все слои модели (облака точек, сетки, ортофото).</li>
+                <li><strong>Добавить слой:</strong> Загрузить дополнительные слои или файлы данных.</li>
+                <li><strong>Показать слой:</strong> Управлять видимостью слоёв.</li>
+                <li><strong>Скрыть слой:</strong> Временно скрыть ненужные слои.</li>
+                <li><strong>Приблизить слой:</strong> Сфокусировать камеру на выбранном слое.</li>
+              </ul>
+            </li>
+            <li><strong>Полноэкранный режим:</strong> Используйте кнопку в панели инструментов для перехода в
+              полноэкранный режим.</li>
+            <li><strong>Дополнительные инструменты:</strong> В панели инструментов доступны измерения, аннотации и
+              всплывающие подсказки.</li>
+          </ul>
+        </div>
+      </section>
+
+
+      <script>
+        const toggleButton = document.getElementById('toggleInstructions');
+        const instructions = document.getElementById('instructions');
+        const toggleIcon = document.getElementById('toggleIcon');
+
+        toggleButton.addEventListener('click', () => {
+          if (instructions.style.display === 'none' || instructions.style.display === '') {
+            instructions.style.display = 'block';
+            toggleIcon.textContent = '−'; // minus sign when open
+          } else {
+            instructions.style.display = 'none';
+            toggleIcon.textContent = '+'; // plus sign when closed
+          }
+        });
+      </script>
+
+
+
 
       <!-- Contacts -->
 
@@ -324,7 +397,9 @@
               <div class="col-address col-base col-md-4">
                 <a href="tel:+37379337000" style="text-decoration: none;">+373 79 337 000</a><br>
                 <a href="mailto:info@gorarchitecture.md" style="text-decoration: none;">info@gorarchitecture.md</a> <br>
-                <a href="https://www.google.com/maps?q=Alexandru+cel+Bun+91,+Chișinau,+Moldova" style="text-decoration: none;" target="_blank" class="header-address">Alexandru cel Bun 91, Chișinau, Moldova</a>
+                <a href="https://www.google.com/maps?q=Alexandru+cel+Bun+91,+Chișinau,+Moldova"
+                  style="text-decoration: none;" target="_blank" class="header-address">Alexandru cel Bun 91, Chișinau,
+                  Moldova</a>
               </div>
               <div class="col-base col-md-8">
                 <form class="js-ajax-form" action="https://formspree.io/f/xnndlqpn" method="POST">
@@ -334,7 +409,8 @@
                         <input type="text" class="form-control" name="name" placeholder="Имя" required>
                       </div>
                       <div class="form-group">
-                        <input type="email" class="form-control" name="email" required placeholder="Электронная почта *">
+                        <input type="email" class="form-control" name="email" required
+                          placeholder="Электронная почта *">
                       </div>
                     </div>
                     <div class="col-field col-sm-6 col-md-4">
@@ -366,8 +442,8 @@
                       Отправить <i class="icon-next"></i>
                     </button>
                   </div>
-                </form>                
-              </div>              
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -375,7 +451,7 @@
 
       <!-- Footer -->
 
-      <footer id="footer" class="footer">     
+      <footer id="footer" class="footer">
         <div class="container">
           <div class="row-base row">
             <div class="col-base text-left-md col-md-4">
@@ -387,7 +463,7 @@
             </div>
             <div class="text-center-md col-base col-md-4">
               <a href="https://scalasoft.md/" class="author-link">
-                by Sala Soft
+                by Scala Soft
               </a>
             </div>
             <div class="text-right-md col-base col-md-4">
@@ -416,43 +492,44 @@
     </div>
   </div>
 
-<!-- SCRIPTS -->
+  <!-- SCRIPTS -->
 
-<script>
-  function switchLanguage(lang) {
-    const supportedLangs = ['en', 'ro', 'ru', 'de'];
+  <script>
+    function switchLanguage(lang) {
+      const supportedLangs = ['en', 'ro', 'ru', 'de'];
 
-    if (supportedLangs.includes(lang)) {
-      window.location.href = `/${lang}/projects.html`;
-    } else {
-      window.location.href = `/en/index.html`;
-    }
-  }
-  
-  document.addEventListener("DOMContentLoaded", function () {
-    const userLang = navigator.language || navigator.userLanguage;
-    const lang = userLang.split('-')[0];
-    const supportedLangs = ['en', 'ro', 'ru', 'de'];
-
-    if (supportedLangs.includes(lang)) {
-      if (window.location.pathname === "/projects.html" || window.location.pathname === "/") {
+      if (supportedLangs.includes(lang)) {
         window.location.href = `/${lang}/projects.html`;
+      } else {
+        window.location.href = `/en/index.html`;
       }
-    } else {
-      window.location.href = `/en/projects.html`;
     }
-  });
 
-</script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const userLang = navigator.language || navigator.userLanguage;
+      const lang = userLang.split('-')[0];
+      const supportedLangs = ['en', 'ro', 'ru', 'de'];
 
-<script src="../js/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/smoothscroll.js"></script>
-<script src="../js/jquery.validate.min.js"></script>
-<script src="../js/wow.min.js"></script>
-<script src="../js/jquery.stellar.min.js"></script>
-<script src="../js/jquery.magnific-popup.js"></script>
-<script src="../js/owl.carousel.min.js"></script>
-<script src="../js/interface.js"></script> 
+      if (supportedLangs.includes(lang)) {
+        if (window.location.pathname === "/projects.html" || window.location.pathname === "/") {
+          window.location.href = `/${lang}/projects.html`;
+        }
+      } else {
+        window.location.href = `/en/projects.html`;
+      }
+    });
+
+  </script>
+
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/smoothscroll.js"></script>
+  <script src="../js/jquery.validate.min.js"></script>
+  <script src="../js/wow.min.js"></script>
+  <script src="../js/jquery.stellar.min.js"></script>
+  <script src="../js/jquery.magnific-popup.js"></script>
+  <script src="../js/owl.carousel.min.js"></script>
+  <script src="../js/interface.js"></script>
 </body>
+
 </html>

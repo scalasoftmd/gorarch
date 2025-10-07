@@ -1,61 +1,159 @@
 {
-    "translations": {
-      "client": "Kunde",
-      "scale": "Größe",
-      "projectDescription": "Projektbeschreibung"
+  "translations": {
+    "client": "Kunde",
+    "scale": "Fläche",
+    "projectDescription": "Projektbeschreibung",
+    "location": "Standort",
+    "objectType": "Objekttyp",
+    "purpose": "Zweck",
+    "floors": "Etagen",
+    "facades": "Fassaden",
+    "features": "Besonderheiten",
+    "status": "Status",
+    "map": "Fortschrittskarte (Baustellen-Tracking in Echtzeit)"
+  },
+  "projects": {
+    "man-service": {
+      "title": "MAN Service Moldova",
+      "client": "Modernize GmbH",
+      "scale": "3500 m²",
+      "location": "Mun. Chișinău, Stadt Durlești",
+      "objectType": "MAN Service Center",
+      "purpose": "Industriegebäude",
+      "floors": "2 Etagen",
+      "facades": "Kombination aus Panoramaverglasung und Sandwichpaneelen",
+      "features": "Erstes MAN Service Center in Moldawien",
+      "status": "Im Bau",
+      "map": "https://cloud.agisoft.com/embedded/projects/aabc355d-9f40-46ad-b449-f11985a2043e/d77418c0-f4ef-4b61-a778-66fa05803bf9/?autoplay=1&name=1&mode=Full&position=28.745446,46.985508,415.270678&orientation=247.373,-85.476,180.004",
+      "backgroundImage": "../img/projects/man-service/1.png",
+      "sections": [
+        {
+          "title": "Funktionalität der Anlage",
+          "description": "Das Gebäude ist für die Wartung von MAN-Lkw vorgesehen, einschließlich Reparaturzonen und Büroräumen.",
+          "image": "../img/projects/man-service/1.png",
+          "alignment": "left"
+        },
+        {
+          "title": "Architektonische Lösungen",
+          "description": "Die Fassaden kombinieren moderne Panoramaverglasung und energieeffiziente Sandwichpaneele.",
+          "image": "../img/projects/man-service/5.png",
+          "alignment": "right"
+        },
+        {
+          "title": "Bedeutung des Projekts",
+          "description": "Dies ist das erste spezialisierte Zentrum in Moldawien und setzt neue Standards für den MAN-Service.",
+          "image": "../img/projects/man-service/8.png",
+          "alignment": "left"
+        }
+      ]
     },
-    "projects": {
-      "medical-center": {
-        "title": "Medical Center",
-        "client": "Modernize GmbH",
-        "scale": "3500 m²",
-        "backgroundImage": "../img/projects/medical-center/1.jpg",
-        "sections": [
-          {
-            "title": "Projektbeschreibung ist hier #1",
-            "description": "Es ist eine gute Idee...",
-            "image": "../img/projects/medical-center/1.jpg",
-            "alignment": "left"
-          },
-          {
-            "title": "Projektbeschreibung ist hier #2",
-            "description": "Es ist eine gute Idee...",
-            "image": "../img/projects/medical-center/3.jpg",
-            "alignment": "right"
-          },
-          {
-            "title": "Projektbeschreibung ist hier #3",
-            "description": "Es ist eine gute Idee...",
-            "image": "../img/projects/medical-center/5.jpg",
-            "alignment": "left"
-          }
-        ]
-      },
-      "man-service": {
-        "title": "MAN Service Moldova",
-        "client": "Modernize GmbH",
-        "scale": "3500 m²",
-        "backgroundImage": "../img/projects/man-service/1.png",
-        "sections": [
-          {
-            "title": "Projektbeschreibung ist hier #1",
-            "description": "Es ist eine gute Idee...",
-            "image": "../img/projects/man-service/1.png",
-            "alignment": "left"
-          },
-          {
-            "title": "Projektbeschreibung ist hier #2",
-            "description": "Es ist eine gute Idee...",
-            "image": "../img/projects/man-service/5.png",
-            "alignment": "right"
-          },
-          {
-            "title": "Projektbeschreibung ist hier #3",
-            "description": "Es ist eine gute Idee...",
-            "image": "../img/projects/man-service/8.png",
-            "alignment": "left"
-          }
-        ]
-      }
+    "medical-center": {
+      "title": "Medizinisches Zentrum",
+      "client": "Modernize GmbH",
+      "scale": "3200 m²",
+      "location": "Stadt Chișinău, Bezirk Buiucani",
+      "objectType": "Rekonstruktion mit Aufstockung von 2 Etagen",
+      "purpose": "Multifunktionales Zentrum",
+      "floors": "5 Ebenen (Kellergeschoss + 4 Obergeschosse)",
+      "facades": "Belüftete Porzellansteinzeugplatten, Panoramaverglasung",
+      "features": "Offene Grundrisse für flexible Nutzung",
+      "status": "Im Bau",
+      "map": "",
+      "sections": [
+        {
+          "title": "Gebäuderenovierung",
+          "description": "Das Projekt sieht die Rekonstruktion eines bestehenden Gebäudes mit der Aufstockung um zwei Etagen vor.",
+          "image": "../img/projects/medical-center/1.jpg",
+          "alignment": "left"
+        },
+        {
+          "title": "Moderne Fassaden",
+          "description": "Die Fassade ist mit Porzellansteinzeug und Panoramaverglasung verkleidet, was einen modernen Stil betont.",
+          "image": "../img/projects/medical-center/3.jpg",
+          "alignment": "right"
+        }
+      ]
+    },
+    "estera-2": {
+      "title": "WOHNANLAGE ESTERA II",
+      "client": "Modernize GmbH",
+      "scale": "23.000 m²",
+      "location": "Mun. Chișinău, Stadt Durlești",
+      "objectType": "Neubau",
+      "purpose": "Mittelgeschossiges Wohngebäude",
+      "floors": "7 Ebenen",
+      "facades": "Kombination aus Porzellansteinzeugplatten, Thermoholz und Putz",
+      "features": "Zweistöckige Tiefgarage und moderner Wohnhof",
+      "status": "Im Bau",
+      "map": "",
+      "sections": [
+        {
+          "title": "Wohnkomplex",
+          "description": "Das Gebäude ist für komfortables Wohnen mit geräumigen Wohnungen und modernen Annehmlichkeiten konzipiert.",
+          "image": "../img/projects/estera-2/1.jpg",
+          "alignment": "left"
+        },
+        {
+          "title": "Innovative Lösungen",
+          "description": "Besonderes Augenmerk wird auf die Fassaden mit modernen Materialien gelegt.",
+          "image": "../img/projects/estera-2/2.jpg",
+          "alignment": "right"
+        }
+      ]
+    },
+    "orhei-apartments": {
+      "title": "WOHNANLAGE ORHEI",
+      "client": "Modernize GmbH",
+      "scale": "7000 m²",
+      "location": "Mun. Orhei, Dorf Nistrena",
+      "objectType": "Neubau",
+      "purpose": "Mittelgeschossiges Wohngebäude",
+      "floors": "7 Ebenen",
+      "facades": "Kombination aus Metallpaneelen und Putz",
+      "features": "Tiefgarage und Geschäftsflächen im Erdgeschoss",
+      "status": "Fertiggestellt",
+      "map": "",
+      "sections": [
+        {
+          "title": "Wohnraum",
+          "description": "Das Projekt bietet Wohnungen mit optimalen Grundrissen und modernen Haustechniksystemen.",
+          "image": "../img/projects/orhei-apartments/1.jpg",
+          "alignment": "left"
+        },
+        {
+          "title": "Funktionalität",
+          "description": "Das Erdgeschoss des Gebäudes ist für Geschäftsflächen vorgesehen und schafft Komfort für die Bewohner.",
+          "image": "../img/projects/orhei-apartments/2.jpg",
+          "alignment": "right"
+        }
+      ]
+    },
+    "carvidon": {
+      "title": "LANDMASCHINEN-KOMPLEX CARVIDON",
+      "client": "Modernize GmbH",
+      "scale": "1600 m²",
+      "location": "Mun. Chișinău, Stadt Stăuceni",
+      "objectType": "Kubota-Carvidon Multifunktionaler Komplex",
+      "purpose": "Industriegebäude",
+      "floors": "3 Etagen",
+      "facades": "Kombination aus industriellen Sandwichpaneelen und Klinkerfassaden",
+      "features": "Kompletter Servicezyklus für Kubota-Landmaschinen an einem Ort",
+      "status": "Fertiggestellt",
+      "map": "",
+      "sections": [
+        {
+          "title": "Multifunktionalität",
+          "description": "Der Komplex kombiniert Vorführung, Service und Lagerung von Premium-Landmaschinen.",
+          "image": "../img/projects/carvidon/1.jpg",
+          "alignment": "left"
+        },
+        {
+          "title": "Vollständiger Service",
+          "description": "Das Projekt ist so konzipiert, dass alle Phasen des Kundenservice in einem Raum bereitgestellt werden.",
+          "image": "../img/projects/carvidon/2.jpg",
+          "alignment": "right"
+        }
+      ]
     }
   }
+}

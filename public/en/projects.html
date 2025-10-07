@@ -49,7 +49,7 @@
     <!-- Header -->
 
     <header id="top" class="header-home">
-      <div class="brand-panel">
+    <div class="brand-panel" style="background-color:transparent">
         <a href="index.html" class="brand js-target-scroll">
           <span>
             <img style="width: 140px; margin-left: -10px;" src="../logo.png" alt="">
@@ -76,6 +76,9 @@
                   <a href="about.html">About Us</a>
                 </li>
                 <li class="active">
+                  <a href="services.html">Services</a>
+                </li>
+                <li>
                   <a href="projects.html">Portfolio</a>
                 </li>
                 <li>
@@ -83,9 +86,9 @@
                 </li>
                 <li><a href="#">English</a>
                   <ul>
+                    <li><a href="#" onclick="switchLanguage('ro')">Română</a></li>
                     <li><a href="#" onclick="switchLanguage('de')">Deutsch</a></li>
                     <li><a href="#" onclick="switchLanguage('ru')">Русский</a></li>
-                    <li><a href="#" onclick="switchLanguage('ro')">Română</a></li>
                   </ul>
                 </li>
               </ul>
@@ -169,10 +172,9 @@
       <!-- Projects -->
 
       <section class="projects">
-        <div class="js-projects-gallery">
           <div class="row">
             <div class="project project-light col-sm-6 col-md-4 col-lg-3">
-              <a href="../img/projects/1.jpg" title="Residential care project in Paris">
+              <a href="/en/project.html?id=medical-center" title="Residential care project in Paris">
                 <figure>
                   <img alt="Medical Center" src="../img/projects/1.jpg">
                   <figcaption>
@@ -188,12 +190,12 @@
               </a>
             </div>
             <div class="project project-light col-sm-6 col-md-4 col-lg-3">
-              <a href="../img/projects/2.jpg" title="Historic building in Magdeburg">
+                            <a href="/en/project.html?id=man-service" title="MAN Service Moldova">
                 <figure>
-                  <img alt="Historic building" src="../img/projects/2.jpg">
+                  <img alt="MAN Service Moldova" src="../img/projects/4.png">
                   <figcaption>
                     <h3 class="project-title">
-                      Historic building <br> in Magdeburg
+                      MAN Service<br>Moldova
                     </h3>
                     <h4 class="project-category">
                       Architecture
@@ -204,7 +206,7 @@
               </a>
             </div>
             <div class="project col-sm-6 col-md-4 col-lg-3">
-              <a href="../img/projects/3.jpg" title="Modern residential complex Estera II">
+              <a href="/en/project.html?id=estera-2" title="Modern residential complex Estera II">
                 <figure>
                   <img alt="Residential complex Estera II" src="../img/projects/3.jpg">
                   <figcaption>
@@ -222,7 +224,7 @@
             <div class="project col-sm-6 col-md-4 col-lg-3">
             </div>
             <div class="project col-sm-6 col-md-4 col-lg-3">
-              <a href="../img/projects/5.jpg" title="Modern residential complex Orhei">
+              <a href="/en/project.html?id=orhei-apartments" title="Modern residential complex Orhei">
                 <figure>
                   <img alt="Residential complex Orhei" src="../img/projects/5.jpg">
                   <figcaption>
@@ -238,39 +240,7 @@
               </a>
             </div>
             <div class="project project-light col-sm-6 col-md-4 col-lg-3">
-              <a href="../img/projects/6.jpg" title="Apartment 23">
-                <figure>
-                  <img alt="Apartment 23" src="../img/projects/6.jpg">
-                  <figcaption>
-                    <h3 class="project-title">
-                      Apartment 23
-                    </h3>
-                    <h4 class="project-category">
-                      Architecture
-                    </h4>
-                    <div class="project-zoom"></div>
-                  </figcaption>
-                </figure>
-              </a>
-            </div>
-            <div class="project col-sm-6 col-md-4 col-lg-3">
-              <a href="../img/projects/7.jpg" title="Avalon Club Office">
-                <figure>
-                  <img alt="Avalon Club Office" src="../img/projects/7.jpg">
-                  <figcaption>
-                    <h3 class="project-title">
-                      Avalon Club<br>Office
-                    </h3>
-                    <h4 class="project-category">
-                      Architecture
-                    </h4>
-                    <div class="project-zoom"></div>
-                  </figcaption>
-                </figure>
-              </a>
-            </div>
-            <div class="project project-light col-sm-6 col-md-4 col-lg-3">
-              <a href="../img/projects/8.jpg" title="Agro-technical complex CARVIDON">
+                            <a href="/en/project.html?id=carvidon" title="Agro-technical complex CARVIDON">
                 <figure>
                   <img alt="Agro-technical complex CARVIDON" src="../img/projects/8.jpg">
                   <figcaption>
@@ -286,12 +256,12 @@
               </a>
             </div>
             <div class="project col-sm-6 col-md-4 col-lg-3">
-              <a href="../img/projects/4.png" title="MAN Service Moldova">
+              <!-- <a href="../img/projects/7.jpg" title="Avalon Club Office">
                 <figure>
-                  <img alt="MAN Service Moldova" src="../img/projects/4.png">
+                  <img alt="Avalon Club Office" src="../img/projects/7.jpg">
                   <figcaption>
                     <h3 class="project-title">
-                      MAN Service<br>Moldova
+                      Avalon Club<br>Office
                     </h3>
                     <h4 class="project-category">
                       Architecture
@@ -299,10 +269,41 @@
                     <div class="project-zoom"></div>
                   </figcaption>
                 </figure>
-              </a>
+              </a> -->
+            </div>
+            <div class="project project-light col-sm-6 col-md-4 col-lg-3">
+              <!-- <a href="../img/projects/6.jpg" title="Apartment 23">
+                <figure>
+                  <img alt="Apartment 23" src="../img/projects/6.jpg">
+                  <figcaption>
+                    <h3 class="project-title">
+                      Apartment 23
+                    </h3>
+                    <h4 class="project-category">
+                      Architecture
+                    </h4>
+                    <div class="project-zoom"></div>
+                  </figcaption>
+                </figure>
+              </a> -->
+            </div>
+            <div class="project col-sm-6 col-md-4 col-lg-3">
+              <!-- <a href="../img/projects/2.jpg" title="Historic building in Magdeburg">
+                <figure>
+                  <img alt="Historic building" src="../img/projects/2.jpg">
+                  <figcaption>
+                    <h3 class="project-title">
+                      Historic building <br> in Magdeburg
+                    </h3>
+                    <h4 class="project-category">
+                      Architecture
+                    </h4>
+                    <div class="project-zoom"></div>
+                  </figcaption>
+                </figure>
+              </a> -->
             </div>
           </div>
-        </div>
       </section>      
 
       <section class="contacts section">
