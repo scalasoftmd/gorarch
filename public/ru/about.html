@@ -72,20 +72,21 @@
                 <li class="active">
                   <a href="about.html">О Нас</a>
                 </li>
-                <li>
-                  <a href="services.html">Услуги</a>
-                </li>
+                <!-- services nav removed -->
                 <li>
                   <a href="projects.html">Портфолио</a>
                 </li>
                 <li>
                   <a href="contacts.html">Контакты</a>
                 </li>
-                <li><a href="#">Русский</a>
+                <li>
+                  <a href="#" aria-label="Русский" title="Русский">
+                    <img src="../img/slider/slide1_files/ru.png" alt="Русский" class="lang-flag">
+                  </a>
                   <ul>
-                    <li><a href="#" onclick="switchLanguage('ro')">Română</a></li>
-                    <li><a href="#" onclick="switchLanguage('en')">English</a></li>
-                    <li><a href="#" onclick="switchLanguage('de')">Deutsch</a></li>
+                    <li><a href="#" onclick="switchLanguage('ro')" aria-label="Română" title="Română"><img src="../img/slider/slide1_files/ro.png" alt="Română" class="lang-flag"></a></li>
+                    <li><a href="#" onclick="switchLanguage('en')" aria-label="English" title="English"><img src="../img/slider/slide1_files/en.png" alt="English" class="lang-flag"></a></li>
+                    <li><a href="#" onclick="switchLanguage('de')" aria-label="Deutsch" title="Deutsch"><img src="../img/slider/slide1_files/de.png" alt="Deutsch" class="lang-flag"></a></li>
                   </ul>
                 </li>
               </ul>
@@ -120,15 +121,18 @@
     <div class="collapse navbar-collapse" id="navbar-mobile"> 
       <ul class="navbar-nav-mobile">
         <li class="active"><a href="about.html">О Нас</a></li>
-        <li class="active"><a href="services.html">Услуги</a></li>
+        <!-- services nav removed -->
         <li><a href="projects.html">Портфолио</a></li>
         <li><a href="contacts.html">Контакты</a></li>
         <li>
-          <a href="#">Русский <i class="fa fa-angle-down"></i></a>
+          <a href="#" aria-label="Русский" title="Русский">
+            <img src="../img/slider/slide1_files/ru.png" alt="Русский" style="width:20px; vertical-align:middle;">
+            <i class="fa fa-angle-down" style="margin-left:6px;"></i>
+          </a>
           <ul>
-            <li><a href="#" onclick="switchLanguage('ro')">Română</a></li>
-            <li><a href="#" onclick="switchLanguage('en')">English</a></li>
-            <li><a href="#" onclick="switchLanguage('de')">Deutsch</a></li>
+            <li><a href="#" onclick="switchLanguage('ro')" aria-label="Română" title="Română"><img src="../img/slider/slide1_files/ro.png" alt="Română" style="width:20px; vertical-align:middle;"></a></li>
+            <li><a href="#" onclick="switchLanguage('en')" aria-label="English" title="English"><img src="../img/slider/slide1_files/en.png" alt="English" style="width:20px; vertical-align:middle;"></a></li>
+            <li><a href="#" onclick="switchLanguage('de')" aria-label="Deutsch" title="Deutsch"><img src="../img/slider/slide1_files/de.png" alt="Deutsch" style="width:20px; vertical-align:middle;"></a></li>
           </ul>
         </li>
       </ul>
@@ -174,7 +178,7 @@
       <section id="about" class="about">
         <div class="container">
           <div class="entry">
-            <h3 class="entry-title">мы превращаем идеи в произведения искусства<span class="text-primary">.</span></h3>
+            <h3 class="entry-title">Команда GOR Architecture<span class="text-primary">.</span></h3>
             <p class="entry-text">GOR Architecture — архитектурное бюро, специализирующееся на проектировании жилых, общественных и промышленных зданий. Мы объединяем креативность, инженерную точность и внимание к деталям, чтобы создавать современные и функциональные пространства.
 
               Наша команда состоит из опытных архитекторов, инженеров и дизайнеров, которые сопровождают проекты на всех этапах — от концепции до реализации. Мы ценим индивидуальный подход и всегда стремимся к тому, чтобы каждый проект соответствовал желаниям клиента и стандартам качества.</p>
@@ -194,15 +198,15 @@
               <div class="col-base col-service col-sm-6 col-md-4 wow fadeInUp">
                 <div class="service-item">
                   <img alt="" src="../img/img-icon/home.png" style="width: 5rem;">
-                  <h4>Проектирование жилых зданий</h4>
-                  <p>FМы разрабатываем архитектуру частных домов, таунхаусов и жилых комплексов — с учётом комфорта, функциональности и эстетики.</p>
+                  <h4>Проектирование жилых <br> зданий</h4>
+                  <p>Мы разрабатываем архитектуру частных домов, таунхаусов и жилых комплексов — с учётом комфорта, функциональности и эстетики.</p>
                 </div>
               </div>
               <div class="col-base col-service col-sm-6 col-md-4 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="service-item">
                   <img alt="" src="../img/img-icon/office.png" style="width: 5rem;">
                   <h4>Проектирование общественных зданий</h4>
-                  <p>FСоздаём проекты офисов, школ, детских садов, медицинских и торговых центров с продуманной логистикой и современным дизайном.</p>
+                  <p>Создаём проекты офисов, школ, детских садов, медицинских и торговых центров с продуманной логистикой и современным дизайном.</p>
                 </div>
               </div>
               <div class="clearfix visible-sm"></div>
@@ -210,7 +214,7 @@
                 <div class="service-item">
                   <img alt="" src="../img/img-icon/factory.png" style="width: 5rem;">
                   <h4>Проектирование промышленных объектов</h4>
-                  <p>FПланируем и проектируем производственные помещения, склады, логистические комплексы с соблюдением всех технических норм и требований безопасности.</p>
+                  <p>Планируем и проектируем производственные помещения, склады, логистические комплексы с соблюдением всех технических норм и требований безопасности.</p>
                 </div>
               </div>
             </div>
@@ -227,7 +231,7 @@
               <div class="col-base col-service col-sm-6 col-md-4 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="service-item">
                   <img alt="" src="../img/img-icon/3d.png" style="width: 5rem;">
-                  <h4>3D-визуализация и дизайн фасадов</h4>
+                  <h4 style="margin-bottom: 30px;">3D-визуализация <br> и дизайн <br> фасадов  &nbsp;</h4>
                   <p>Создаём фотореалистичные визуализации зданий и подбираем гармоничные решения для внешнего вида объектов.</p>
                 </div>
               </div>
@@ -249,7 +253,7 @@
             <div class="row-base row">
               <div class="col-address col-base col-md-4">
                 <a href="tel:+37379337000" style="text-decoration: none;">+373 79 337 000</a><br>
-                <a href="mailto:info@gorarchitecture.md" style="text-decoration: none;">info@gorarchitecture.md</a> <br>
+                <a href="mailto:gor.architecture@gmail.com" style="text-decoration: none;">gor.architecture@gmail.com</a> <br>
                 <a href="https://www.google.com/maps?q=Alexandru+cel+Bun+91,+Chișinau,+Moldova" style="text-decoration: none;" target="_blank" class="header-address">Alexandru cel Bun 91, Chișinau, Moldova</a>
               </div>
               <div class="col-base col-md-8">

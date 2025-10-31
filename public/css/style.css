@@ -142,6 +142,12 @@ body{
 
 }
 
+/* Small helper for language flag icons used in header */
+.lang-flag {
+  width: 20px;
+  vertical-align: middle;
+}
+
 h1,
 .h1{ 
   font-family: 'Oswald', sans-serif;
@@ -252,7 +258,6 @@ textarea.form-control{
   border:1px solid #323232;
   -webkit-box-shadow:none;
           box-shadow:none;
-      -webkit-appearance: none;
   -webkit-transition: all .15s;
        -o-transition: all .15s;
           transition: all .15s;
@@ -856,7 +861,7 @@ label.error{
   left: 100%;
   top:60%;
   visibility: hidden;
-  min-width: 200px;
+  min-width: 20px;
   opacity: 0;
   box-shadow: 0 15px 35px rgba(0,0,0,0.1);
   background:rgba(50, 50, 50, 0.95);
@@ -1142,7 +1147,7 @@ label.error{
 
 .tp-caption{
   padding: 0 20px;
-  text-align: right;
+  text-align: center;
 }
 
 .arrow-left,
@@ -1262,7 +1267,7 @@ label.error{
 
 .col-about-title{
   margin-top: 0;
-  margin-bottom:1.1em; 
+  margin-bottom:1.1em;
 }
 
 .col-about-info p:last-child{
@@ -1294,7 +1299,8 @@ label.error{
 }
 
 .service-item{
-  margin-bottom:2em; 
+  margin-bottom:2em;
+  text-align: center;
 }
 
 .service-item:last-child{
@@ -2374,7 +2380,8 @@ img.mfp-img{
 
 
   .arrow-left{
-    top: 43.5vmin;
+    top: 60%;
+    left: 50%;
     bottom: auto;
   }
 
@@ -2382,7 +2389,8 @@ img.mfp-img{
     left: 28vmin;
     right: auto;
     margin-left: 5em;
-    top: 43.5vmin;
+    left: 60%;
+    top: 60%;
     bottom: auto;
   }
 

@@ -75,20 +75,21 @@
                 <li>
                   <a href="about.html">О Нас</a>
                 </li>
-                <li class="active">
-                  <a href="services.html">Услуги</a>
-                </li>
+                <!-- services nav removed -->
                 <li>
                   <a href="projects.html">Портфолио</a>
                 </li>
                 <li>
                   <a href="contacts.html">Контакты</a>
                 </li>
-                <li><a href="#">Русский</a>
+                <li>
+                  <a href="#" aria-label="Русский" title="Русский">
+                    <img src="../img/slider/slide1_files/ru.png" alt="Русский" style="width:20px; vertical-align:middle;">
+                  </a>
                   <ul>
-                    <li><a href="#" onclick="switchLanguage('ro')">Română</a></li>
-                    <li><a href="#" onclick="switchLanguage('en')">English</a></li>
-                    <li><a href="#" onclick="switchLanguage('de')">Deutsch</a></li>
+                    <li><a href="#" onclick="switchLanguage('ro')" aria-label="Română" title="Română"><img src="../img/slider/slide1_files/ro.png" alt="Română" class="lang-flag"></a></li>
+                    <li><a href="#" onclick="switchLanguage('en')" aria-label="English" title="English"><img src="../img/slider/slide1_files/en.png" alt="English" class="lang-flag"></a></li>
+                    <li><a href="#" onclick="switchLanguage('de')" aria-label="Deutsch" title="Deutsch"><img src="../img/slider/slide1_files/de.png" alt="Deutsch" class="lang-flag"></a></li>
                   </ul>
                 </li>
               </ul>
@@ -124,13 +125,17 @@
           <ul class="navbar-nav-mobile">
             <li><a href="about.html">О нас</a></li>
             <li class="active"><a href="projects.html">Портфолио</a></li>
+            <!-- services nav removed -->
             <li><a href="contacts.html">Контакты</a></li>
             <li>
-              <a href="#">Русский<i class="fa fa-angle-down"></i></a>
+              <a href="#" aria-label="Русский" title="Русский">
+                <img src="../img/slider/slide1_files/ru.png" alt="Русский" style="width:20px; vertical-align:middle;">
+                <i class="fa fa-angle-down" style="margin-left:6px;"></i>
+              </a>
               <ul>
-                <li><a href="#" onclick="switchLanguage('ro')">Română</a></li>
-                <li><a href="#" onclick="switchLanguage('en')">English</a></li>
-                <li><a href="#" onclick="switchLanguage('de')">Deutsch</a></li>
+                <li><a href="#" onclick="switchLanguage('ro')" aria-label="Română" title="Română"><img src="../img/slider/slide1_files/ro.png" alt="Română" style="width:20px; vertical-align:middle;"></a></li>
+                <li><a href="#" onclick="switchLanguage('en')" aria-label="English" title="English"><img src="../img/slider/slide1_files/en.png" alt="English" style="width:20px; vertical-align:middle;"></a></li>
+                <li><a href="#" onclick="switchLanguage('de')" aria-label="Deutsch" title="Deutsch"><img src="../img/slider/slide1_files/de.png" alt="Deutsch" style="width:20px; vertical-align:middle;"></a></li>
               </ul>
             </li>
           </ul>
@@ -303,7 +308,7 @@
             <div class="row-base row">
               <div class="col-address col-base col-md-4">
                 <a href="tel:+37379337000" style="text-decoration: none;">+373 79 337 000</a><br>
-                <a href="mailto:info@gorarchitecture.md" style="text-decoration: none;">info@gorarchitecture.md</a> <br>
+                <a href="mailto:gor.architecture@gmail.com" style="text-decoration: none;">gor.architecture@gmail.com</a> <br>
                 <a href="https://www.google.com/maps?q=Alexandru+cel+Bun+91,+Chișinau,+Moldova" style="text-decoration: none;"
                   target="_blank" class="header-address">Alexandru cel Bun 91, Кишинёв, Молдова</a>
               </div>
