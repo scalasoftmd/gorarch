@@ -1560,6 +1560,7 @@ label.error{
 .project figure:hover .project-category{
   opacity: 0;
   letter-spacing: 2em;
+  margin-left: 20px;
 }
 
 .project figure:hover .project-zoom{

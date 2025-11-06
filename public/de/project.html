@@ -17,6 +17,416 @@
   <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
   <link href="../css/style.css" rel="stylesheet" media="screen">
+  
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+    import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js';
+
+    const firebaseConfig = {
+      databaseURL: "https://gorarch-60f19-default-rtdb.europe-west1.firebasedatabase.app/"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    class ProjectLoader {
+      constructor() {
+        this.currentLanguage = this.detectLanguage();
+        this.projectId = this.getProjectId();
+        this.loadProject();
+      }
+
+      detectLanguage() {
+        const path = window.location.pathname;
+        const langMatch = path.match(/\/(de|en|ro|ru)\//);
+        return langMatch ? langMatch[1] : 'de';
+      }
+
+      getProjectId() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('id');
+      }
+
+      getLocalizedText(textObj, fallback = '') {
+        if (typeof textObj === 'string') {
+          return textObj;
+        }
+        
+        if (textObj && typeof textObj === 'object') {
+          // Try current language first
+          if (textObj[this.currentLanguage]) {
+            return textObj[this.currentLanguage];
+          }
+          
+          // Fallback to other languages in order of preference
+          const fallbackLangs = ['de', 'en', 'ru', 'ro'];
+          for (const lang of fallbackLangs) {
+            if (textObj[lang]) {
+              return textObj[lang];
+            }
+          }
+          
+          // Return any available value
+          const values = Object.values(textObj).filter(v => v);
+          if (values.length > 0) {
+            return values[0];
+          }
+        }
+        
+        return fallback;
+      }
+
+      async loadProject() {
+        if (!this.projectId) {
+          this.showError('Projekt-ID nicht gefunden');
+          return;
+        }
+
+        try {
+          const projectRef = ref(database, `portfolio/${this.projectId}`);
+          
+          onValue(projectRef, (snapshot) => {
+            const project = snapshot.val();
+            
+            if (!project) {
+              this.showError('Projekt nicht gefunden');
+              return;
+            }
+
+            this.renderProject(project);
+          }, (error) => {
+            console.error('Fehler beim Laden des Projekts:', error);
+            this.showError('Fehler beim Laden des Projekts aus der Datenbank');
+          });
+        } catch (error) {
+          console.error('Fehler bei der Verbindung zu Firebase:', error);
+          this.showError('Fehler bei der Verbindung zur Datenbank');
+        }
+      }
+
+      renderProject(project) {
+        // Get localized title
+        const projectTitle = this.getLocalizedText(project.title, 'Projekt');
+        
+        // Update page title
+        document.title = `${projectTitle} - GOR Architecture`;
+        
+        // Update main header
+        const headerElement = document.querySelector('.main-header h1');
+        if (headerElement) {
+          headerElement.textContent = projectTitle;
+        }
+        
+        // Update project info
+        const infoContainer = document.querySelector('.project-title-info');
+        if (infoContainer) {
+          let infoHTML = '';
+          
+          if (project.client) {
+            infoHTML += `<div class="project-info-item"><span class="text-primary">Kunde</span>: ${project.client}</div>`;
+          }
+          
+          if (project.scale) {
+            infoHTML += `<div class="project-info-item"><span class="text-primary">Maßstab:</span> ${project.scale}</div>`;
+          }
+          
+          infoContainer.innerHTML = infoHTML;
+        }
+        
+        // Update background image
+        const mainSection = document.querySelector('.main-project');
+        if (mainSection && project.backgroundImage) {
+          mainSection.style.backgroundImage = `url('${project.backgroundImage}')`;
+        }
+        
+        // Render map if available
+        this.renderMap(project.map, projectTitle);
+        
+        // Show/hide 3D instructions based on map availability
+        this.toggleInstructions(project.map);
+        
+        // Update project sections with multilingual support
+        this.renderProjectSections(project.sections || []);
+        
+        // Render additional images
+        this.renderAdditionalImages(project.images || []);
+      }
+
+      toggleInstructions(mapSrc) {
+        const instructionsButton = document.getElementById('toggleInstructions');
+        const instructionsSection = document.getElementById('instructions');
+        
+        if (mapSrc && mapSrc.trim() !== '') {
+          // Show instructions if map exists
+          if (instructionsButton) instructionsButton.style.display = 'flex';
+          if (instructionsSection) instructionsSection.style.display = instructionsSection.style.display || 'none';
+        } else {
+          // Hide instructions if no map
+          if (instructionsButton) instructionsButton.style.display = 'none';
+          if (instructionsSection) instructionsSection.style.display = 'none';
+        }
+      }
+
+      renderProjectSections(sections) {
+        const container = document.querySelector('.project-details .container');
+        if (!container) {
+          console.error('Projekt-Details-Container nicht gefunden');
+          return;
+        }
+
+        container.innerHTML = '';
+
+        if (sections.length === 0) {
+          container.innerHTML = `
+            <div class="project-details-item">
+              <div class="row">
+                <div class="col-md-12 text-center" style="padding: 3rem;">
+                  <h3>Projektdetails werden bald hinzugefügt</h3>
+                  <p>Wir arbeiten daran, detaillierte Informationen zu diesem Projekt hinzuzufügen.</p>
+                </div>
+              </div>
+            </div>
+          `;
+          return;
+        }
+
+        sections.forEach((section, index) => {
+          // Get localized text for section
+          const sectionTitle = this.getLocalizedText(section.title);
+          const sectionDescription = this.getLocalizedText(section.description);
+          
+          if (!sectionTitle && !sectionDescription && !section.image) {
+            return; // Skip empty sections
+          }
+
+          const alignmentClass = section.alignment === 'right' ? 'fadeInRight' : 'fadeInLeft';
+          const offsetClass = section.alignment === 'right' ? '' : 'col-md-offset-4';
+          const imageOrderClass = section.alignment === 'right' ? 'col-md-8' : `col-md-8 ${offsetClass}`;
+
+          const sectionHTML = `
+            <div class="project-details-item">
+              <div class="row">
+                ${sectionTitle || sectionDescription ? `
+                  <div class="project-details-info wow ${alignmentClass}">
+                    ${sectionTitle ? `<h3 class="project-details-title">${sectionTitle}</h3>` : ''}
+                    ${sectionDescription ? `<p class="project-details-descr">${sectionDescription}</p>` : ''}
+                  </div>
+                ` : ''}
+                ${section.image ? `
+                  <div class="project-details-img ${imageOrderClass}">
+                    <img alt="${sectionTitle || 'Projektbild'}" class="img-responsive" src="${section.image}" onerror="this.style.display='none'">
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          `;
+
+          container.innerHTML += sectionHTML;
+        });
+      }
+
+      renderAdditionalImages(images) {
+        if (!images || images.length === 0) return;
+
+        const container = document.querySelector('.project-details .container');
+        if (!container) return;
+
+        // Add photo progress section
+        const additionalImagesHTML = `
+          <div class="project-details-item">
+            <div class="row">
+              <div class="col-md-12">
+                <h3 class="project-details-title text-center" style="margin-bottom: 2rem;">Fotofortschritt</h3>
+                
+                <!-- Main Photo Display -->
+                <div class="photo-gallery" style="position: relative; text-align: center;">
+                  <div class="main-photo-container" style="position: relative; display: inline-block; max-width: 100%;">
+                    <img id="mainPhoto" 
+                         src="${images[0]}" 
+                         alt="Projekt-Fotofortschritt" 
+                         class="img-responsive" 
+                         style="width: auto; max-height: 800px; height: auto; box-shadow: 0 4px 15px rgba(0,0,0,0.2);" 
+                         onerror="this.parentElement.style.display='none'">
+                    
+                    <!-- Navigation Arrows -->
+                    ${images.length > 1 ? `
+                      <button class="photo-nav prev-photo" onclick="changePhoto(-1)" 
+                              style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); 
+                                     background: rgba(0,0,0,0.5); color: white; border: none; 
+                                     border-radius: 50%; width: 40px; height: 40px; 
+                                     font-size: 18px; cursor: pointer; z-index: 10;
+                                     display: flex; align-items: center; justify-content: center;">
+                        ‹
+                      </button>
+                      
+                      <button class="photo-nav next-photo" onclick="changePhoto(1)" 
+                              style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); 
+                                     background: rgba(0,0,0,0.5); color: white; border: none; 
+                                     border-radius: 50%; width: 40px; height: 40px; 
+                                     font-size: 18px; cursor: pointer; z-index: 10;
+                                     display: flex; align-items: center; justify-content: center;">
+                        ›
+                      </button>
+                    ` : ''}
+                  </div>
+                  
+                  <!-- Photo Counter -->
+                  ${images.length > 1 ? `
+                    <div class="photo-counter" style="margin-top: 15px; color: #666; font-size: 14px;">
+                      <span id="currentPhotoIndex">1</span> von <span id="totalPhotos">${images.length}</span>
+                    </div>
+                  ` : ''}
+                  
+                  <!-- Thumbnails (if more than 1 photo) -->
+                  ${images.length > 1 ? `
+                    <div class="photo-thumbnails" style="margin-top: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; max-width: 800px; margin-left: auto; margin-right: auto;">
+                      ${images.map((imageUrl, index) => `
+                        <img src="${imageUrl}" 
+                             alt="Vorschau ${index + 1}" 
+                             class="thumbnail" 
+                             onclick="goToPhoto(${index})"
+                             style="width: 40px; height: 70px; object-fit: cover; 
+                                    cursor: pointer; border: 1px solid ${index === 0 ? 'white' : 'transparent'}; transition: all 0.3s;"
+                             data-index="${index}"
+                             onerror="this.style.display='none'">
+                      `).join('')}
+                    </div>
+                  ` : ''}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        container.innerHTML += additionalImagesHTML;
+        
+        // Add the photo gallery JavaScript after the HTML is inserted
+        if (images.length > 1) {
+          this.addPhotoGalleryScript(images);
+        }
+      }
+
+      addPhotoGalleryScript(images) {
+        // Same photo gallery script as in Russian version
+        const script = document.createElement('script');
+        script.textContent = `
+          let currentPhotoIndex = 0;
+          const photoUrls = ${JSON.stringify(images)};
+          
+          function changePhoto(direction) {
+            currentPhotoIndex += direction;
+            
+            if (currentPhotoIndex < 0) {
+              currentPhotoIndex = photoUrls.length - 1;
+            } else if (currentPhotoIndex >= photoUrls.length) {
+              currentPhotoIndex = 0;
+            }
+            
+            updatePhoto();
+          }
+          
+          function goToPhoto(index) {
+            currentPhotoIndex = index;
+            updatePhoto();
+          }
+          
+          function updatePhoto() {
+            const mainPhoto = document.getElementById('mainPhoto');
+            const counterElement = document.getElementById('currentPhotoIndex');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            
+            if (mainPhoto && photoUrls[currentPhotoIndex]) {
+              mainPhoto.src = photoUrls[currentPhotoIndex];
+            }
+            
+            if (counterElement) {
+              counterElement.textContent = currentPhotoIndex + 1;
+            }
+            
+            // Update thumbnail borders
+            thumbnails.forEach((thumb, index) => {
+              if (index === currentPhotoIndex) {
+                thumb.style.borderColor = 'white';
+              } else {
+                thumb.style.borderColor = 'transparent';
+              }
+            });
+          }
+          
+          // Keyboard navigation
+          document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+              changePhoto(-1);
+            } else if (event.key === 'ArrowRight') {
+              changePhoto(1);
+            }
+          });
+        `;
+        
+        // Append the script to the document head
+        document.head.appendChild(script);
+      }
+
+      renderMap(mapSrc, mapTitle) {
+        // Remove existing map
+        let oldMap = document.querySelector('.desktop-agisoft');
+        if (oldMap) oldMap.remove();
+
+        if (mapSrc && mapSrc.trim() !== '') {
+          // Insert map before contacts section
+          const contactsSection = document.querySelector('.contacts.section');
+          if (contactsSection) {
+            const mapSection = document.createElement('section');
+            mapSection.innerHTML = `
+              <div class="container" style="margin-top: 5rem; margin-bottom: 3rem;">
+                <header class="section-header">
+                  <h2 class="section-title">3D <span class="text-primary">Modell</span></h2>
+                </header>
+                <div class="text-center" style="margin-top: 3rem;">
+                  <div class="desktop-agisoft" style="display: flex; justify-content: center;">
+                    <iframe src="${mapSrc}"
+                      width="1200px"
+                      height="600px"
+                      allow="clipboard-write"
+                      allowfullscreen="allowfullscreen"
+                      style="border: 0"
+                      title="${mapTitle}">
+                    </iframe>
+                  </div>
+                </div>
+              </div>
+            `;
+            contactsSection.parentNode.insertBefore(mapSection, contactsSection);
+          }
+        }
+      }
+
+      showError(message) {
+        const container = document.querySelector('.project-details .container');
+        if (container) {
+          container.innerHTML = `
+            <div class="project-details-item">
+              <div class="row">
+                <div class="col-md-12 text-center" style="padding: 3rem;">
+                  <h3 style="color: #dc3545;">Fehler</h3>
+                  <p>${message}</p>
+                  <a href="projects.html" class="btn btn-primary" style="margin-top: 1rem;">
+                    Zurück zu Projekten
+                  </a>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      }
+    }
+
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      new ProjectLoader();
+    });
+  </script>
 </head>
 
 <body>
@@ -147,14 +557,13 @@
 
     <!-- Home -->
 
-    <main class="main main-inner main-project" style="background-image:url('img/bg/project.jpg');"
+    <main class="main main-inner main-project" style="background-image:url('../img/projects/placeholder.jpg');"
       data-stellar-background-ratio="0.6">
       <div class="container">
         <header class="main-header">
-          <h1>Projekt in Paris</h1>
+          <h1>Projekt wird geladen...</h1>
           <div class="project-title-info">
-            <div class="project-info-item"><span class="text-primary">Kunde</span>: Modernize GmbH</div>
-            <div class="project-info-item"><span class="text-primary">Maßstab:</span> 3500 km<sup>2</sup></div>
+            <div class="project-info-item">Projektinformationen werden geladen...</div>
           </div>
         </header>
       </div>
@@ -178,60 +587,25 @@
     </main>
 
     <div class="content">
-
       <section class="project-details">
         <div class="container">
           <div class="project-details-item">
             <div class="row">
-              <div class="project-details-info wow fadeInLeft">
-                <h3 class="project-details-title">
-                  Projektbeschreibung<br> Abschnitt #1
-                </h3>
-                <p class="project-details-descr">Es ist eine gute Idee, Ihren PC als ein Büro zu betrachten. Er speichert Dateien,
-                  Programme, Bilder. Dies kann mit den Akten, Maschinen und Dekorationen eines echten Büros verglichen werden. Das
-                  Betriebssystem ist der Chef. Denken Sie an ein Büro, das Sie besucht haben und das langsam und ineffizient war.</p>
-              </div>
-              <div class="project-details-img col-md-8 col-md-offset-4">
-                <img alt="" class="img-responsive" src="../img/projects/1-780x668.jpg">
-              </div>
-            </div>
-          </div>
-          <div class="project-details-item">
-            <div class="row">
-              <div class="project-details-info wow fadeInRight">
-                <h3 class="project-details-title">
-                  Projektbeschreibung<br> Abschnitt #2
-                </h3>
-                <p class="project-details-descr">Es ist eine gute Idee, Ihren PC als ein Büro zu betrachten. Er speichert Dateien,
-                  Programme, Bilder. Dies kann mit den Akten, Maschinen und Dekorationen eines echten Büros verglichen werden. Das
-                  Betriebssystem ist der Chef. Denken Sie an ein Büro, das Sie besucht haben und das langsam und ineffizient war.</p>
-              </div>
-              <div class="project-details-img col-md-8">
-                <img alt="" class="img-responsive" src="img/projects/2-780x668.jpg">
-              </div>
-            </div>
-          </div>
-          <div class="project-details-item">
-            <div class="row">
-              <div class="project-details-info wow fadeInLeft">
-                <h3 class="project-details-title">
-                  Projektbeschreibung<br> Abschnitt #3
-                </h3>
-                <p class="project-details-descr">Es ist eine gute Idee, Ihren PC als ein Büro zu betrachten. Er speichert Dateien,
-                  Programme, Bilder. Dies kann mit den Akten, Maschinen und Dekorationen eines echten Büros verglichen werden. Das
-                  Betriebssystem ist der Chef. Denken Sie an ein Büro, das Sie besucht haben und das langsam und ineffizient war.</p>
-              </div>
-              <div class="project-details-img col-md-8 col-md-offset-4">
-                <img alt="" class="img-responsive" src="img/projects/3-780x668.jpg">
+              <div class="col-md-12 text-center" style="padding: 3rem;">
+                <div class="loader-brand">
+                  <div class="sk-folding-cube">
+                    <div class="sk-cube1 sk-cube"></div>
+                    <div class="sk-cube2 sk-cube"></div>
+                    <div class="sk-cube4 sk-cube"></div>
+                    <div class="sk-cube3 sk-cube"></div>
+                  </div>
+                </div>
+                <p style="margin-top: 1rem;">Projektdetails werden geladen...</p>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      <header class="section-header" style="margin-bottom: 3rem;">
-        <h2 class="section-title"><span class="text-primary">Projekt</span> Fortschritt</h2>
-      </header>
 
       <!-- Toggle Button -->
       <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
@@ -303,7 +677,7 @@
           }
         });
       </script>
-      
+
       <section class="contacts section">
         <div class="container">
           <header class="section-header">
@@ -412,7 +786,7 @@
   <script>
         function switchLanguage(lang) {
           const supportedLangs = ['en', 'ro', 'ru', 'de'];
-          const currentProjectId = new URLarchParams(window.location.search).get('id');
+          const currentProjectId = new URLSearchParams(window.location.search).get('id');
   
         if (supportedLangs.includes(lang)) {
           const projectParam = currentProjectId ? `?id=${currentProjectId}` : '';

@@ -16,6 +16,142 @@
   <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
   <link href="../css/style.css" rel="stylesheet" media="screen">
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+    import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js';
+
+    const firebaseConfig = {
+      // Add your Firebase config here
+      databaseURL: "https://gorarch-60f19-default-rtdb.europe-west1.firebasedatabase.app/"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    // Load projects from Firebase
+    function loadProjects() {
+      const projectsRef = ref(database, 'portfolio');
+      
+      onValue(projectsRef, (snapshot) => {
+        const data = snapshot.val();
+        const projectsContainer = document.querySelector('.projects .row');
+        
+        if (!projectsContainer) return;
+        
+        // Clear existing projects (keep only the first few hardcoded ones if needed)
+        projectsContainer.innerHTML = '';
+        
+        if (data) {
+          Object.entries(data).forEach(([id, project]) => {
+            const projectElement = createProjectElement(id, project);
+            projectsContainer.appendChild(projectElement);
+          });
+        } else {
+          // Show empty state
+          projectsContainer.innerHTML = `
+            <div class="col-xs-12 text-center" style="padding: 3rem;">
+              <h3>Проекты скоро появятся</h3>
+              <p>В настоящее время мы работаем над добавлением наших проектов в портфолио.</p>
+            </div>
+          `;
+        }
+      }, (error) => {
+        console.error('Error loading projects:', error);
+        const projectsContainer = document.querySelector('.projects .row');
+        if (projectsContainer) {
+          projectsContainer.innerHTML = `
+            <div class="col-xs-12 text-center" style="padding: 3rem;">
+              <h3>Ошибка загрузки проектов</h3>
+              <p>Не удалось загрузить проекты. Попробуйте обновить страницу.</p>
+            </div>
+          `;
+        }
+      });
+    }
+
+    function createProjectElement(id, project) {
+      const div = document.createElement('div');
+      div.className = 'project project-light col-sm-6 col-md-4 col-lg-3';
+      
+      // Use background image if available, otherwise use a placeholder
+      const imageUrl = project.backgroundImage || '../img/projects/placeholder.jpg';
+      
+      // Get title based on current language, with fallbacks
+      let projectTitle = 'Проект';
+      if (project.title) {
+        if (typeof project.title === 'string') {
+          projectTitle = project.title;
+        } else if (typeof project.title === 'object') {
+          // Try current language (ru), then fallback to other languages
+          projectTitle = project.title.ru || 
+                        project.title.ro || 
+                        project.title.en || 
+                        project.title.de || 
+                        'Проект';
+        }
+      }
+      
+      // Create tags HTML if tags exist
+      let tagsHtml = '';
+      if (project.tags && Array.isArray(project.tags) && project.tags.length > 0) {
+        tagsHtml = project.tags.map((tag, index) => {
+          const marginLeft = index * 25; // 25px spacing between each tag
+          return `
+            <span class="project-category" style="
+              display: inline-block; 
+              margin-left: ${marginLeft}px; 
+              margin-right: 5px; 
+              margin-bottom: 3px;
+              font-size: 13px;
+              line-height: 1.2;
+              white-space: nowrap;
+            ">
+              ${tag.toUpperCase()}
+            </span>
+          `;
+        }).join('');
+      } else {
+        // Fallback to client if no tags
+        tagsHtml = `<h4 class="project-category">${project.client || 'Архитектура'}</h4>`;
+      }
+      
+      div.innerHTML = `
+        <a href="/ru/project.html?id=${id}" title="${projectTitle}">
+          <figure>
+            <div style="width: 100%; height: 900px; overflow: hidden; position: relative;">
+              <img alt="${projectTitle}" 
+                   src="${imageUrl}" 
+                   onerror="this.src='../img/projects/placeholder.jpg'"
+                   style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            </div>
+            <figcaption>
+              <h3 class="project-title">
+                ${projectTitle}
+              </h3>
+              <div style="margin-top: 8px; line-height: 1.3;">
+                ${tagsHtml}
+              </div>
+              <div class="project-zoom"></div>
+            </figcaption>
+          </figure>
+        </a>
+      `;
+      
+      return div;
+    }
+
+    // Load projects when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadProjects);
+    } else {
+      loadProjects();
+    }
+
+    // Make functions available globally if needed
+    window.loadProjects = loadProjects;
+  </script>
 </head>
 
 <body>
@@ -179,169 +315,39 @@
     <div class="content">
 
       <!-- Projects -->
-
       <section class="projects">
-        <div class="row">
-          <div class="project project-light col-sm-6 col-md-4 col-lg-3">
-            <a href="/ru/project.html?id=medical-center" title="Центр ухода в Париже">
-              <figure>
-                <img alt="Медицинский центр" src="../img/projects/1.jpg">
-                <figcaption>
-                  <h3 class="project-title">
-                    Многофункциональный центр
-                  </h3>
-                    <h4 class="project-category">
-                      Генеральный план
-                    </h4>
-                    <h4 class="project-category" style="margin-left: 25px;">
-                      Архитектура
-                    </h4>
-                    <h4 class="project-category" style="margin-left: 50px;">
-                      Конструктив
-                    </h4>
-                    <h4 class="project-category" style="margin-left: 75px;">
-                      Дизайн
-                    </h4>
-                    <h4 class="project-category" style="margin-left: 100px;">
-                      Системы MEP
-                    </h4>
-                  <div class="project-zoom"></div>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-          <div class="project project-light col-sm-6 col-md-4 col-lg-3">
-            <a href="/ru/project.html?id=man-service" title="MAN Сервис Молдова">
-              <figure>
-                <img alt="MAN Сервис Молдова" src="../img/projects/4.png">
-                <figcaption>
-                  <h3 class="project-title">
-                    MAN Сервис<br>Молдова
-                  </h3>
-                  <h4 class="project-category">
-                    Архитектура
-                  </h4>
-                  <div class="project-zoom"></div>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-          <div class="project col-sm-6 col-md-4 col-lg-3">
-            <a href="/ru/project.html?id=estera-2" title="Современный жилой комплекс Estera II">
-              <figure>
-                <img alt="Жилой комплекс Estera II" src="../img/projects/3.jpg">
-                <figcaption>
-                  <h3 class="project-title">
-                    Жилой комплекс<br>Estera II
-                  </h3>
-                  <h4 class="project-category">
-                    Архитектура
-                  </h4>
-                  <div class="project-zoom"></div>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-          <div class="project col-sm-6 col-md-4 col-lg-3"></div>
-          <div class="project col-sm-6 col-md-4 col-lg-3">
-            <a href="/ru/project.html?id=orhei-apartments" title="Современный жилой комплекс Орхей">
-              <figure>
-                <img alt="Жилой комплекс Орхей" src="../img/projects/5.jpg">
-                <figcaption>
-                  <h3 class="project-title">
-                    Жилой комплекс<br>Орхей
-                  </h3>
-                  <h4 class="project-category">
-                    Архитектура
-                  </h4>
-                  <div class="project-zoom"></div>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-          <div class="project project-light col-sm-6 col-md-4 col-lg-3">
-            <a href="/ru/project.html?id=carvidon" title="Агротехнический комплекс CARVIDON">
-              <figure>
-                <img alt="Агротехнический комплекс CARVIDON" src="../img/projects/8.jpg">
-                <figcaption>
-                  <h3 class="project-title">
-                    Агротехнический комплекс <br> CARVIDON
-                  </h3>
-                  <h4 class="project-category">
-                    Архитектура
-                  </h4>
-                  <div class="project-zoom"></div>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-          <div class="project col-sm-6 col-md-4 col-lg-3">
-            <!-- <a href="../img/projects/7.jpg" title="Офис Avalon Club">
-        <figure>
-          <img alt="Офис Avalon Club" src="../img/projects/7.jpg">
-          <figcaption>
-            <h3 class="project-title">
-              Avalon Club<br>Офис
-            </h3>
-            <h4 class="project-category">
-              Архитектура
-            </h4>
-            <div class="project-zoom"></div>
-          </figcaption>
-        </figure>
-      </a> -->
-          </div>
-          <div class="project project-light col-sm-6 col-md-4 col-lg-3">
-            <!-- <a href="../img/projects/6.jpg" title="Квартира 23">
-        <figure>
-          <img alt="Квартира 23" src="../img/projects/6.jpg">
-          <figcaption>
-            <h3 class="project-title">
-              Квартира 23
-            </h3>
-            <h4 class="project-category">
-              Архитектура
-            </h4>
-            <div class="project-zoom"></div>
-          </figcaption>
-        </figure>
-      </a> -->
-          </div>
-          <div class="project col-sm-6 col-md-4 col-lg-3">
-            <!-- <a href="../img/projects/2.jpg" title="Историческое здание в Магдебурге">
-        <figure>
-          <img alt="Историческое здание" src="../img/projects/2.jpg">
-          <figcaption>
-            <h3 class="project-title">
-              Историческое здание <br> в Магдебурге
-            </h3>
-            <h4 class="project-category">
-              Архитектура
-            </h4>
-            <div class="project-zoom"></div>
-          </figcaption>
-        </figure>
-      </a> -->
+        <div class="row" id="projects-container">
+          <!-- Projects will be loaded dynamically from Firebase -->
+          <div class="col-xs-12 text-center" style="padding: 3rem;">
+            <div class="loader-brand">
+              <div class="sk-folding-cube">
+                <div class="sk-cube1 sk-cube"></div>
+                <div class="sk-cube2 sk-cube"></div>
+                <div class="sk-cube4 sk-cube"></div>
+                <div class="sk-cube3 sk-cube"></div>
+              </div>
+            </div>
+            <p style="margin-top: 1rem;">Загрузка проектов...</p>
           </div>
         </div>
       </section>
 
-      <header class="section-header" style="margin-bottom: 3rem;">
+      <!-- <header class="section-header" style="margin-bottom: 3rem;">
         <h2 class="section-title"><span class="text-primary">Прогресс</span> проекта</h2>
-      </header>
+      </header> -->
 
       <!-- Toggle Button -->
-      <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
+      <!-- <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
         <button id="toggleInstructions"
           style="margin-top: 20px; background: none; border: none; 
                           font-size: 20px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;">
           <span style="font-weight: 600;">Как пользоваться 3D-просмотрщиком и инструментами</span>
           <span id="toggleIcon" style="font-weight: bold;">+</span>
         </button>
-      </div>
+      </div> -->
 
 
-      <!-- Instructions Section (hidden by default) -->
+      <!-- Instructions Section (hidden by default)
       <section id="instructions" style="margin-top: 2rem; padding: 15px; border-radius: 5px; 
                 box-shadow: 0 0 8px rgba(0,0,0,0.1); display: none;">
         <div style="display: flex; justify-content: center;">
@@ -378,7 +384,7 @@
               всплывающие подсказки.</li>
           </ul>
         </div>
-      </section>
+      </section> -->
 
 
       <script>

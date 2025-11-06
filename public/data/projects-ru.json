@@ -17,13 +17,6 @@
       "title": "MAN Service Moldova",
       "client": "Modernize GmbH",
       "scale": "3500 м²",
-      "location": "мун. Кишинёв, г. Дурлешты",
-      "objectType": "Сервисный центр MAN",
-      "purpose": "Промышленный объект",
-      "floors": "2 этажа",
-      "facades": "Комбинация панорамного остекления и сэндвич-панелей",
-      "features": "Первый сервисный центр MAN в Молдове",
-      "status": "В процессе",
       "map": "https://cloud.agisoft.com/embedded/projects/aabc355d-9f40-46ad-b449-f11985a2043e/d77418c0-f4ef-4b61-a778-66fa05803bf9/?autoplay=1&name=1&mode=Full&position=28.745446,46.985508,415.270678&orientation=247.373,-85.476,180.004",
       "backgroundImage": "../img/projects/man-service/1.png",
       "sections": [
@@ -45,6 +38,10 @@
           "image": "../img/projects/man-service/8.png",
           "alignment": "left"
         }
+      ],
+      "images": [
+        "../img/projects/man-service/2.png",
+        "../img/projects/man-service/3.png"
       ]
     },
     "medical-center": {

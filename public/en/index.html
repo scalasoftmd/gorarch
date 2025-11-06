@@ -15,6 +15,174 @@
 <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
 <link href="../css/style.css" rel="stylesheet" media="screen">
+
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+  import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js';
+
+  const firebaseConfig = {
+    databaseURL: "https://gorarch-60f19-default-rtdb.europe-west1.firebasedatabase.app/"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+
+  // Load first 4 projects for homepage carousel
+  function loadHomeProjects() {
+    const projectsRef = ref(database, 'portfolio');
+    
+    onValue(projectsRef, (snapshot) => {
+      const data = snapshot.val();
+      const projectsContainer = document.querySelector('.projects .row');
+      
+      if (!projectsContainer) return;
+      
+      // Clear existing projects
+      projectsContainer.innerHTML = '';
+      
+      if (data) {
+        // Get first 4 projects
+        const projects = Object.entries(data).slice(0, 4);
+        
+        projects.forEach(([id, project]) => {
+          const projectElement = createProjectElement(id, project);
+          projectsContainer.appendChild(projectElement);
+        });
+      } else {
+        // Show fallback content
+        projectsContainer.innerHTML = `
+          <div class="col-xs-12 text-center" style="padding: 3rem;">
+            <h3>Projects coming soon</h3>
+            <p>We are currently working on adding our projects to the portfolio.</p>
+          </div>
+        `;
+      }
+    }, (error) => {
+      console.error('Error loading home projects:', error);
+      const projectsContainer = document.querySelector('.projects .row');
+      if (projectsContainer) {
+        projectsContainer.innerHTML = `
+          <div class="col-xs-12 text-center" style="padding: 3rem;">
+            <h3>Error loading projects</h3>
+            <p>Could not load projects. Please refresh the page.</p>
+          </div>
+        `;
+      }
+    });
+  }
+
+  function createProjectElement(id, project) {
+      const div = document.createElement('div');
+      div.className = 'project project-light col-sm-6 col-md-4 col-lg-3';
+      
+      // Debug the project data structure
+      console.log('Project data for ID:', id, project);
+      
+      // Extract title properly - handle different data structures
+      let projectTitle = 'Untitled'; // Default fallback
+      
+      if (typeof project.title === 'string') {
+        projectTitle = project.title;
+      } else if (typeof project.title === 'object' && project.title !== null) {
+        // If title is an object, try to extract string value
+        if (project.title.en) {
+          projectTitle = project.title.en;
+        } else if (project.title.text) {
+          projectTitle = project.title.text;
+        } else if (project.title.value) {
+          projectTitle = project.title.value;
+        } else {
+          // If it's an object but no recognizable structure, try to get first string value
+          const titleValues = Object.values(project.title);
+          const firstStringValue = titleValues.find(val => typeof val === 'string');
+          if (firstStringValue) {
+            projectTitle = firstStringValue;
+          }
+        }
+      } else if (project.name && typeof project.name === 'string') {
+        // Fallback to name field if title is not available
+        projectTitle = project.name;
+      }
+      
+      // Use background image if available
+      const imageUrl = project.backgroundImage;
+      
+      // Create tags HTML - handle both old array format and new multilingual format
+      let tagsHtml = '';
+      if (project.tags) {
+        let tagsToDisplay = [];
+        
+        if (Array.isArray(project.tags)) {
+          // Old format - array of strings
+          tagsToDisplay = project.tags;
+        } else if (typeof project.tags === 'object') {
+          // New multilingual format
+          const currentLangTags = project.tags.en || project.tags.ru || project.tags.ro || project.tags.de || '';
+          if (currentLangTags) {
+            tagsToDisplay = currentLangTags.split(',').map(tag => tag.trim()).filter(tag => tag);
+          }
+        }
+        
+        if (tagsToDisplay.length > 0) {
+          tagsHtml = tagsToDisplay.map((tag, index) => {
+            const marginLeft = index * 25; // 25px spacing between each tag
+            return `
+              <span class="project-category" style="
+                display: inline-block; 
+                margin-left: ${marginLeft}px; 
+                margin-right: 5px; 
+                margin-bottom: 3px;
+                font-size: 13px;
+                line-height: 1.2;
+                white-space: nowrap;
+              ">
+                ${tag.toUpperCase()}
+              </span>
+            `;
+          }).join('');
+        }
+      }
+      
+      if (!tagsHtml) {
+        // Fallback to client if no tags
+        tagsHtml = `<h4 class="project-category">${project.client || 'Architecture'}</h4>`;
+      }
+      
+      div.innerHTML = `
+      <a href="/en/project.html?id=${id}" title="${projectTitle}">
+        <figure>
+          <div style="width: 100%; height: 900px; overflow: hidden; position: relative;">
+            <img alt="${projectTitle}" 
+                 src="${imageUrl}" 
+                 style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          </div>
+          <figcaption>
+            <h3 class="project-title">
+              ${projectTitle}
+            </h3>
+            <div style="margin-top: 8px; line-height: 1.3;">
+              ${tagsHtml}
+            </div>
+            <div class="project-zoom"></div>
+          </figcaption>
+        </figure>
+      </a>
+    `;
+    
+    return div;
+  }
+
+  // Load projects when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadHomeProjects);
+  } else {
+    loadHomeProjects();
+  }
+
+  // Make functions available globally if needed
+  window.loadHomeProjects = loadHomeProjects;
+</script>
 </head>
 <body>
   
@@ -219,7 +387,7 @@
                 data-start="1500" 
                 data-splitin="none" 
                 data-splitout="none" 
-                data-responsive_offset="on"><a href="/ru/projects" style="font-family: 'Oswald'; margin-left: -22vw; font-size: 0.9rem;" class="btn js-target-scroll">Узнать больше<i class="icon-next"></i></a>
+                data-responsive_offset="on"><a href="/en/projects.html" style="font-family: 'Oswald'; margin-left: -22vw; font-size: 0.9rem;" class="btn js-target-scroll">Learn more<i class="icon-next"></i></a>
               </div>
             </li>
 
@@ -270,7 +438,7 @@
               data-start="1500" 
               data-splitin="none" 
               data-splitout="none" 
-              data-responsive_offset="on"><a href="/ru/projects" style="font-family: 'Oswald'; margin-left: -22vw; font-size: 0.9rem;" class="btn js-target-scroll">Узнать больше<i class="icon-next"></i></a>
+              data-responsive_offset="on"><a href="/en/projects.html" style="font-family: 'Oswald'; margin-left: -22vw; font-size: 0.9rem;" class="btn js-target-scroll">Learn more<i class="icon-next"></i></a>
             </div>
 
             <!-- Slide 3 -->
@@ -320,7 +488,7 @@
               data-start="1500" 
               data-splitin="none" 
               data-splitout="none" 
-              data-responsive_offset="on"><a href="/ru/projects" style="font-family: 'Oswald'; margin-left: -22vw; font-size: 0.9rem;" class="btn js-target-scroll">Узнать больше<i class="icon-next"></i></a>
+              data-responsive_offset="on"><a href="/en/projects.html" style="font-family: 'Oswald'; margin-left: -22vw; font-size: 0.9rem;" class="btn js-target-scroll">Learn more<i class="icon-next"></i></a>
             </div>
             </li>
           </ul>
@@ -377,141 +545,24 @@
           <h2 class="section-title">Our <span class="text-primary">Projects</span></h2>
         </div>
         <div class="section-content">
-          <div class="projects-carousel js-projects-carousel js-projects-gallery">
-            <div class="project project-light">
-              <a href="../img/projects/1.jpg" title="Medical Center">
-                <figure>
-                  <img alt="" src="../img/projects/1.jpg">
-                  <figcaption>
-                    <h3 class="project-title">
-                      Medical Center<br>
-                    </h3>
-                    <h4 class="project-category">
-                      Architecture
-                    </h4>
-                    <div class="project-zoom"></div>
-                  </figcaption>
-                </figure>
-              </a>
-            </div>
-            <div class="project project-light">
-              <a href="../img/projects/2.jpg" title="Historical Building">
-                <figure>
-                  <img alt="" src="../img/projects/2.jpg">
-                  <figcaption>
-                    <h3 class="project-title">
-                      Historical Site<br> in Magdeburg
-                    </h3>
-                    <h4 class="project-category">
-                      Architecture
-                    </h4>
-                    <div class="project-zoom"></div>
-                  </figcaption>
-                </figure>
-              </a>
-            </div>
-            <div class="project">
-              <a href="../img/projects/3.jpg" title="Residential Complex Estera II">
-                <figure>
-                  <img alt="" src="../img/projects/3.jpg">
-                  <figcaption>
-                    <h3 class="project-title">
-                      Residential Complex<br>Estera II
-                    </h3>
-                    <h4 class="project-category">
-                      Architecture
-                    </h4>
-                    <div class="project-zoom"></div>
-                  </figcaption>
-                </figure>
-              </a>
-            </div>
-            <div class="project">
-              <a href="../img/projects/4.png" title="MAN Service Moldova">
-                <figure>
-                  <img alt="" src="../img/projects/4.png">
-                  <figcaption>
-                    <h3 class="project-title">
-                      MAN Service<br>Moldova
-                    </h3>
-                    <h4 class="project-category">
-                      Architecture
-                    </h4>
-                    <div class="project-zoom"></div>
-                  </figcaption>
-                </figure>
-              </a>
-            </div>
-            <div class="project">
-              <a href="../img/projects/5.jpg" title="Residential Complex Orhei">
-                <figure>
-                  <img alt="" src="../img/projects/5.jpg">
-                  <figcaption>
-                    <h3 class="project-title">
-                      Residential Complex<br>Orhei
-                    </h3>
-                    <h4 class="project-category">
-                      Architecture
-                    </h4>
-                    <div class="project-zoom"></div>
-                  </figcaption>
-                </figure>
-              </a>
-            </div>
-            <div class="project">
-              <a href="../img/projects/6.jpg" title="Apartment 23">
-                <figure>
-                  <img alt="" src="../img/projects/6.jpg">
-                  <figcaption>
-                    <h3 class="project-title">
-                      Apartment 23<br>
-                    </h3>
-                    <h4 class="project-category">
-                      Architecture
-                    </h4>
-                    <div class="project-zoom"></div>
-                  </figcaption>
-                </figure>
-              </a>
-            </div>
-            <div class="project">
-              <a href="../img/projects/7.jpg" title="Avalon Club Office">
-                <figure>
-                  <img alt="" src="../img/projects/7.jpg">
-                  <figcaption>
-                    <h3 class="project-title">
-                      Office<br>Avalon Club
-                    </h3>
-                    <h4 class="project-category">
-                      Architecture
-                    </h4>
-                    <div class="project-zoom"></div>
-                  </figcaption>
-                </figure>
-              </a>
-            </div>
-            <div class="project">
-              <a href="../img/projects/8.jpg" title="Agrotechnical Complex CARVIDON">
-                <figure>
-                  <img alt="" src="../img/projects/8.jpg">
-                  <figcaption>
-                    <h3 class="project-title">
-                      Agrotechnical Complex <br> CARVIDON
-                    </h3>
-                    <h4 class="project-category">
-                      Architecture
-                    </h4>
-                    <div class="project-zoom"></div>
-                  </figcaption>
-                </figure>
-              </a>
+          <div class="row" id="projects-container">
+            <!-- Projects will be loaded dynamically from Firebase -->
+            <div class="col-xs-12 text-center" style="padding: 3rem;">
+              <div class="loader-brand">
+                <div class="sk-folding-cube">
+                  <div class="sk-cube1 sk-cube"></div>
+                  <div class="sk-cube2 sk-cube"></div>
+                  <div class="sk-cube4 sk-cube"></div>
+                  <div class="sk-cube3 sk-cube"></div>
+                </div>
+              </div>
+              <p style="margin-top: 1rem;">Loading projects...</p>
             </div>
           </div>
         </div>
 
         <div class="container" style="margin-top: 5rem;">
           <header class="section-header">
-            <h2 class="section-title">Not <span class="text-primary">impressed?</span></h2>
             <h3 style="margin-top: 3rem;" class="text-center">Take a look at the full list of our projects.</h3>
           </header>
           <div class="text-center" style="margin-top: 3rem;">
@@ -564,6 +615,27 @@
         <li class="client">
           <a href="#"><img alt="" style="width: 15rem;" src="../img/clients/6.png"></a>
         </li>
+        <li class="client">
+          <a href="#"><img alt="" style="width: 15rem;" src="../img/clients/7.jpg"></a>
+        </li>
+        <li class="client">
+          <a href="#"><img alt="" style="width: 15rem;" src="../img/clients/8.jpg"></a>
+        </li>
+        <li class="client">
+          <a href="#"><img alt="" style="width: 15rem;" src="../img/clients/9.jpg"></a>
+        </li>
+        <li class="client">
+          <a href="#"><img alt="" style="width: 15rem;" src="../img/clients/10.jpg"></a>
+        </li>
+        <li class="client">
+          <a href="#"><img alt="" style="width: 15rem;" src="../img/clients/11.png"></a>
+        </li>
+        <li class="client">
+          <a href="#"><img alt="" style="width: 15rem;" src="../img/clients/12.png"></a>
+        </li>
+        <li class="client">
+          <a href="#"><img alt="" style="width: 15rem;" src="../img/clients/13.png"></a>
+        </li>
       </ul>
     </div>
     <div class="section-content">
@@ -579,7 +651,7 @@
     <header class="section-header">
       <h2 class="section-title">See the <span class="text-primary">progress</span></h2>
       <h4 style="margin-top: 3rem;" class="text-center">
-        With our 3D reports powered by Agisoft Cloud, you don’t just get text summaries,
+        With our 3D reports powered by Agisoft Cloud, you don't just get text summaries,
         but clear visualizations of the actual progress of the work. Track every stage of your project —
         right in the browser, anytime.
       </h4>
@@ -608,7 +680,7 @@
       <div class="row-base row">
         <div class="col-address col-base col-md-4">
           <a href="tel:+37379337000" style="text-decoration: none;">+373 79 337 000</a><br>
-          <a href="mailto:info@gorarchitecture.md" style="text-decoration: none;">info@gorarchitecture.md</a> <br>
+          <a href="mailto:gor.architecture@gmail.com" style="text-decoration: none;">gor.architecture@gmail.com</a> <br>
           <a href="https://www.google.com/maps?q=Alexandru+cel+Bun+91,+Chișinau,+Moldova" style="text-decoration: none;" target="_blank" class="header-address">Alexandru cel Bun 91, Chișinău, Moldova</a>
         </div>
         <div class="col-base col-md-8">

@@ -17,6 +17,416 @@
   <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
   <link href="../css/style.css" rel="stylesheet" media="screen">
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+    import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js';
+
+    const firebaseConfig = {
+      databaseURL: "https://gorarch-60f19-default-rtdb.europe-west1.firebasedatabase.app/"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    class ProjectLoader {
+      constructor() {
+        this.currentLanguage = this.detectLanguage();
+        this.projectId = this.getProjectId();
+        this.loadProject();
+      }
+
+      detectLanguage() {
+        const path = window.location.pathname;
+        const langMatch = path.match(/\/(de|en|ro|ru)\//);
+        return langMatch ? langMatch[1] : 'en';
+      }
+
+      getProjectId() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('id');
+      }
+
+      getLocalizedText(textObj, fallback = '') {
+        if (typeof textObj === 'string') {
+          return textObj;
+        }
+        
+        if (textObj && typeof textObj === 'object') {
+          // Try current language first
+          if (textObj[this.currentLanguage]) {
+            return textObj[this.currentLanguage];
+          }
+          
+          // Fallback to other languages in order of preference
+          const fallbackLangs = ['en', 'ru', 'ro', 'de'];
+          for (const lang of fallbackLangs) {
+            if (textObj[lang]) {
+              return textObj[lang];
+            }
+          }
+          
+          // Return any available value
+          const values = Object.values(textObj).filter(v => v);
+          if (values.length > 0) {
+            return values[0];
+          }
+        }
+        
+        return fallback;
+      }
+
+      async loadProject() {
+        if (!this.projectId) {
+          this.showError('Project ID not found');
+          return;
+        }
+
+        try {
+          const projectRef = ref(database, `portfolio/${this.projectId}`);
+          
+          onValue(projectRef, (snapshot) => {
+            const project = snapshot.val();
+            
+            if (!project) {
+              this.showError('Project not found');
+              return;
+            }
+
+            this.renderProject(project);
+          }, (error) => {
+            console.error('Error loading project:', error);
+            this.showError('Error loading project from database');
+          });
+        } catch (error) {
+          console.error('Error connecting to Firebase:', error);
+          this.showError('Error connecting to database');
+        }
+      }
+
+      renderProject(project) {
+        // Get localized title
+        const projectTitle = this.getLocalizedText(project.title, 'Project');
+        
+        // Update page title
+        document.title = `${projectTitle} - GOR Architecture`;
+        
+        // Update main header
+        const headerElement = document.querySelector('.main-header h1');
+        if (headerElement) {
+          headerElement.textContent = projectTitle;
+        }
+        
+        // Update project info
+        const infoContainer = document.querySelector('.project-title-info');
+        if (infoContainer) {
+          let infoHTML = '';
+          
+          if (project.client) {
+            infoHTML += `<div class="project-info-item"><span class="text-primary">Client</span>: ${project.client}</div>`;
+          }
+          
+          if (project.scale) {
+            infoHTML += `<div class="project-info-item"><span class="text-primary">Scale:</span> ${project.scale}</div>`;
+          }
+          
+          infoContainer.innerHTML = infoHTML;
+        }
+        
+        // Update background image
+        const mainSection = document.querySelector('.main-project');
+        if (mainSection && project.backgroundImage) {
+          mainSection.style.backgroundImage = `url('${project.backgroundImage}')`;
+        }
+        
+        // Render map if available
+        this.renderMap(project.map, projectTitle);
+        
+        // Show/hide 3D instructions based on map availability
+        this.toggleInstructions(project.map);
+        
+        // Update project sections with multilingual support
+        this.renderProjectSections(project.sections || []);
+        
+        // Render additional images
+        this.renderAdditionalImages(project.images || []);
+      }
+
+      toggleInstructions(mapSrc) {
+        const instructionsButton = document.getElementById('toggleInstructions');
+        const instructionsSection = document.getElementById('instructions');
+        
+        if (mapSrc && mapSrc.trim() !== '') {
+          // Show instructions if map exists
+          if (instructionsButton) instructionsButton.style.display = 'flex';
+          if (instructionsSection) instructionsSection.style.display = instructionsSection.style.display || 'none';
+        } else {
+          // Hide instructions if no map
+          if (instructionsButton) instructionsButton.style.display = 'none';
+          if (instructionsSection) instructionsSection.style.display = 'none';
+        }
+      }
+
+      renderProjectSections(sections) {
+        const container = document.querySelector('.project-details .container');
+        if (!container) {
+          console.error('Project details container not found');
+          return;
+        }
+
+        container.innerHTML = '';
+
+        if (sections.length === 0) {
+          container.innerHTML = `
+            <div class="project-details-item">
+              <div class="row">
+                <div class="col-md-12 text-center" style="padding: 3rem;">
+                  <h3>Project details will be added soon</h3>
+                  <p>We are working on adding detailed information about this project.</p>
+                </div>
+              </div>
+            </div>
+          `;
+          return;
+        }
+
+        sections.forEach((section, index) => {
+          // Get localized text for section
+          const sectionTitle = this.getLocalizedText(section.title);
+          const sectionDescription = this.getLocalizedText(section.description);
+          
+          if (!sectionTitle && !sectionDescription && !section.image) {
+            return; // Skip empty sections
+          }
+
+          const alignmentClass = section.alignment === 'right' ? 'fadeInRight' : 'fadeInLeft';
+          const offsetClass = section.alignment === 'right' ? '' : 'col-md-offset-4';
+          const imageOrderClass = section.alignment === 'right' ? 'col-md-8' : `col-md-8 ${offsetClass}`;
+
+          const sectionHTML = `
+            <div class="project-details-item">
+              <div class="row">
+                ${sectionTitle || sectionDescription ? `
+                  <div class="project-details-info wow ${alignmentClass}">
+                    ${sectionTitle ? `<h3 class="project-details-title">${sectionTitle}</h3>` : ''}
+                    ${sectionDescription ? `<p class="project-details-descr">${sectionDescription}</p>` : ''}
+                  </div>
+                ` : ''}
+                ${section.image ? `
+                  <div class="project-details-img ${imageOrderClass}">
+                    <img alt="${sectionTitle || 'Project image'}" class="img-responsive" src="${section.image}" onerror="this.style.display='none'">
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+          `;
+
+          container.innerHTML += sectionHTML;
+        });
+      }
+
+      renderAdditionalImages(images) {
+        if (!images || images.length === 0) return;
+
+        const container = document.querySelector('.project-details .container');
+        if (!container) return;
+
+        // Add photo progress section
+        const additionalImagesHTML = `
+          <div class="project-details-item">
+            <div class="row">
+              <div class="col-md-12">
+                <h3 class="project-details-title text-center" style="margin-bottom: 2rem;">Photo Progress</h3>
+                
+                <!-- Main Photo Display -->
+                <div class="photo-gallery" style="position: relative; text-align: center;">
+                  <div class="main-photo-container" style="position: relative; display: inline-block; max-width: 100%;">
+                    <img id="mainPhoto" 
+                         src="${images[0]}" 
+                         alt="Project photo progress" 
+                         class="img-responsive" 
+                         style="width: auto; max-height: 800px; height: auto; box-shadow: 0 4px 15px rgba(0,0,0,0.2);" 
+                         onerror="this.parentElement.style.display='none'">
+                    
+                    <!-- Navigation Arrows -->
+                    ${images.length > 1 ? `
+                      <button class="photo-nav prev-photo" onclick="changePhoto(-1)" 
+                              style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); 
+                                     background: rgba(0,0,0,0.5); color: white; border: none; 
+                                     border-radius: 50%; width: 40px; height: 40px; 
+                                     font-size: 18px; cursor: pointer; z-index: 10;
+                                     display: flex; align-items: center; justify-content: center;">
+                        ‹
+                      </button>
+                      
+                      <button class="photo-nav next-photo" onclick="changePhoto(1)" 
+                              style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); 
+                                     background: rgba(0,0,0,0.5); color: white; border: none; 
+                                     border-radius: 50%; width: 40px; height: 40px; 
+                                     font-size: 18px; cursor: pointer; z-index: 10;
+                                     display: flex; align-items: center; justify-content: center;">
+                        ›
+                      </button>
+                    ` : ''}
+                  </div>
+                  
+                  <!-- Photo Counter -->
+                  ${images.length > 1 ? `
+                    <div class="photo-counter" style="margin-top: 15px; color: #666; font-size: 14px;">
+                      <span id="currentPhotoIndex">1</span> of <span id="totalPhotos">${images.length}</span>
+                    </div>
+                  ` : ''}
+                  
+                  <!-- Thumbnails (if more than 1 photo) -->
+                  ${images.length > 1 ? `
+                    <div class="photo-thumbnails" style="margin-top: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; max-width: 800px; margin-left: auto; margin-right: auto;">
+                      ${images.map((imageUrl, index) => `
+                        <img src="${imageUrl}" 
+                             alt="Thumbnail ${index + 1}" 
+                             class="thumbnail" 
+                             onclick="goToPhoto(${index})"
+                             style="width: 40px; height: 70px; object-fit: cover; 
+                                    cursor: pointer; border: 1px solid ${index === 0 ? 'white' : 'transparent'}; transition: all 0.3s;"
+                             data-index="${index}"
+                             onerror="this.style.display='none'">
+                      `).join('')}
+                    </div>
+                  ` : ''}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        container.innerHTML += additionalImagesHTML;
+        
+        // Add the photo gallery JavaScript after the HTML is inserted
+        if (images.length > 1) {
+          this.addPhotoGalleryScript(images);
+        }
+      }
+
+      addPhotoGalleryScript(images) {
+        // Create script element to avoid syntax errors
+        const script = document.createElement('script');
+        script.textContent = `
+          let currentPhotoIndex = 0;
+          const photoUrls = ${JSON.stringify(images)};
+          
+          function changePhoto(direction) {
+            currentPhotoIndex += direction;
+            
+            if (currentPhotoIndex < 0) {
+              currentPhotoIndex = photoUrls.length - 1;
+            } else if (currentPhotoIndex >= photoUrls.length) {
+              currentPhotoIndex = 0;
+            }
+            
+            updatePhoto();
+          }
+          
+          function goToPhoto(index) {
+            currentPhotoIndex = index;
+            updatePhoto();
+          }
+          
+          function updatePhoto() {
+            const mainPhoto = document.getElementById('mainPhoto');
+            const counterElement = document.getElementById('currentPhotoIndex');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            
+            if (mainPhoto && photoUrls[currentPhotoIndex]) {
+              mainPhoto.src = photoUrls[currentPhotoIndex];
+            }
+            
+            if (counterElement) {
+              counterElement.textContent = currentPhotoIndex + 1;
+            }
+            
+            // Update thumbnail borders
+            thumbnails.forEach((thumb, index) => {
+              if (index === currentPhotoIndex) {
+                thumb.style.borderColor = 'white';
+              } else {
+                thumb.style.borderColor = 'transparent';
+              }
+            });
+          }
+          
+          // Keyboard navigation
+          document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+              changePhoto(-1);
+            } else if (event.key === 'ArrowRight') {
+              changePhoto(1);
+            }
+          });
+        `;
+        
+        // Append the script to the document head
+        document.head.appendChild(script);
+      }
+
+      renderMap(mapSrc, mapTitle) {
+        // Remove existing map
+        let oldMap = document.querySelector('.desktop-agisoft');
+        if (oldMap) oldMap.remove();
+
+        if (mapSrc && mapSrc.trim() !== '') {
+          // Insert map before contacts section
+          const contactsSection = document.querySelector('.contacts.section');
+          if (contactsSection) {
+            const mapSection = document.createElement('section');
+            mapSection.innerHTML = `
+              <div class="container" style="margin-top: 5rem; margin-bottom: 3rem;">
+                <header class="section-header">
+                  <h2 class="section-title">3D <span class="text-primary">Model</span></h2>
+                </header>
+                <div class="text-center" style="margin-top: 3rem;">
+                  <div class="desktop-agisoft" style="display: flex; justify-content: center;">
+                    <iframe src="${mapSrc}"
+                      width="1200px"
+                      height="600px"
+                      allow="clipboard-write"
+                      allowfullscreen="allowfullscreen"
+                      style="border: 0"
+                      title="${mapTitle}">
+                    </iframe>
+                  </div>
+                </div>
+              </div>
+            `;
+            contactsSection.parentNode.insertBefore(mapSection, contactsSection);
+          }
+        }
+      }
+
+      showError(message) {
+        const container = document.querySelector('.project-details .container');
+        if (container) {
+          container.innerHTML = `
+            <div class="project-details-item">
+              <div class="row">
+                <div class="col-md-12 text-center" style="padding: 3rem;">
+                  <h3 style="color: #dc3545;">Error</h3>
+                  <p>${message}</p>
+                  <a href="projects.html" class="btn btn-primary" style="margin-top: 1rem;">
+                    Back to Projects
+                  </a>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      }
+    }
+
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      new ProjectLoader();
+    });
+  </script>
 </head>
 
 <body>
@@ -55,14 +465,15 @@
         <span>
           <img style="width: 140px; margin-left: -10px;" src="../logo.png" alt="">
         </span>
-                <li>
-                  <a href="#" aria-label="English" title="English"><img src="../img/slider/slide1_files/en.png" alt="English" class="lang-flag" style="margin-left:6px;"></a>
-                  <ul>
-                    <li><a href="#" onclick="switchLanguage('de')" aria-label="Deutsch" title="Deutsch"><img src="../img/slider/slide1_files/de.png" alt="Deutsch" class="lang-flag"></a></li>
-                    <li><a href="#" onclick="switchLanguage('ru')" aria-label="Русский" title="Русский"><img src="../img/slider/slide1_files/ru.png" alt="Русский" class="lang-flag"></a></li>
-                    <li><a href="#" onclick="switchLanguage('ro')" aria-label="Română" title="Română"><img src="../img/slider/slide1_files/ro.png" alt="Română" class="lang-flag"></a></li>
-                  </ul>
-                </li>
+      </a>
+      <div style="margin-left: 170px;" class="brand-name">GOR Architecture</div>
+    </div>
+    </div>
+    
+    <!-- Navigation Desctop -->
+    
+      <nav class="navbar-desctop visible-md visible-lg">
+        <div class="container">
           <div style="display: flex; justify-content: space-around; align-items: center;">
             <div>
               <a href="index.html" class="brand js-target-scroll">
@@ -76,7 +487,7 @@
                 <li>
                   <a href="about.html">About Us</a>
                 </li>
-                <li>
+                <li class="active">
                   <a href="services.html">Services</a>
                 </li>
                 <li>
@@ -98,60 +509,58 @@
           </div>
         </div>
       </nav>
-    
-    <!-- Navigation Mobile -->
-    <nav class="navbar-mobile">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <div>
-          <a href="#top" class="brand js-target-scroll">
-            <span>
-              <img style="width: 140px; margin-left: -10px;" src="../logo.png" alt="">
-            </span>
-          </a>
-        </div>
-        <div>
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-mobile">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-      </div>
-    
-      <!-- Navbar Collapse -->
-      <div class="collapse navbar-collapse" id="navbar-mobile">
-        <ul class="navbar-nav-mobile">
+              
+              <!-- Navigation Mobile -->
+              
+              <nav class="navbar-mobile">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <a href="#top" class="brand js-target-scroll">
+                      <span>
+                        <img style="width: 140px; margin-left: -10px;" src="../logo.png" alt="">
+                      </span>
+                    </a>
+                  </div>
+                  <div>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-mobile">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                  </div>
+                </div>
+              
+                <!-- Navbar Collapse -->
+              
+                <div class="collapse navbar-collapse" id="navbar-mobile">
+                  <ul class="navbar-nav-mobile">
           <li><a href="about.html">About Us</a></li>
           <li class="active"><a href="projects.html">Portfolio</a></li>
           <li><a href="contacts.html">Contact</a></li>
           <li>
-            <a href="#" aria-label="English" title="English"><img src="../img/slider/slide1_files/en.png" alt="English" class="lang-flag"><i class="fa fa-angle-down"></i></a>
-            <ul>
-              <li><a href="#" onclick="switchLanguage('de')" aria-label="Deutsch" title="Deutsch"><img src="../img/slider/slide1_files/de.png" alt="Deutsch" class="lang-flag"></a></li>
-              <li><a href="#" onclick="switchLanguage('ru')" aria-label="Русский" title="Русский"><img src="../img/slider/slide1_files/ru.png" alt="Русский" class="lang-flag"></a></li>
-              <li><a href="#" onclick="switchLanguage('ro')" aria-label="Română" title="Română"><img src="../img/slider/slide1_files/ro.png" alt="Română" class="lang-flag"></a></li>
-            </ul>
+              <a href="#" aria-label="English" title="English"><img src="../img/slider/slide1_files/en.png" alt="English" class="lang-flag"><i class="fa fa-angle-down" style="margin-left:6px;"></i></a>
+              <ul>
+                <li><a href="#" onclick="switchLanguage('de')" aria-label="Deutsch" title="Deutsch"><img src="../img/slider/slide1_files/de.png" alt="Deutsch" class="lang-flag"></a></li>
+                <li><a href="#" onclick="switchLanguage('ru')" aria-label="Русский" title="Русский"><img src="../img/slider/slide1_files/ru.png" alt="Русский" class="lang-flag"></a></li>
+                <li><a href="#" onclick="switchLanguage('ro')" aria-label="Română" title="Română"><img src="../img/slider/slide1_files/ro.png" alt="Română" class="lang-flag"></a></li>
+              </ul>
           </li>
-        </ul>
-      </div>
-      </nav>
-    </header>
+          </ul>
+          </div>
+          </nav>
+          </header>
 
   <!-- Layout -->
 
   <div class="layout">
-
     <!-- Home -->
-
-    <main class="main main-inner main-project" style="background-image:url('img/bg/project.jpg');"
-      data-stellar-background-ratio="0.6">
+    <main class="main main-inner main-project" style="background-image:url('../img/projects/placeholder.jpg');" data-stellar-background-ratio="0.6">
       <div class="container">
         <header class="main-header">
-          <h1>Project in Paris</h1>
+          <h1>Loading project...</h1>
           <div class="project-title-info">
-            <div class="project-info-item"><span class="text-primary">Client</span>: Modernize ltd.</div>
-            <div class="project-info-item"><span class="text-primary">Scale:</span> 3500 km<sup>2</sup></div>
+            <div class="project-info-item">Loading project information...</div>
           </div>
         </header>
       </div>
@@ -174,81 +583,40 @@
       </div>
     </main>
 
-    <div class="content">
-
+    <div class="content">   
       <section class="project-details">
         <div class="container">
           <div class="project-details-item">
             <div class="row">
-              <div class="project-details-info wow fadeInLeft">
-                <h3 class="project-details-title">
-                  Project description<br> is here #1
-                </h3>
-                <p class="project-details-descr">It is a good idea to think of your PC as an office. It stores files,
-                  programs, pictures.
-                  This can be compared to an actual office’s files, machines and decorations.
-                  The operating system is the boss. With this image in mind, think of an office you’ve visited that was
-                  slow and inefficient.</p>
-              </div>
-              <div class="project-details-img col-md-8 col-md-offset-4">
-                <img alt="" class="img-responsive" src="../img/projects/1-780x668.jpg">
-              </div>
-            </div>
-          </div>
-          <div class="project-details-item">
-            <div class="row">
-              <div class="project-details-info wow fadeInRight">
-                <h3 class="project-details-title">
-                  Project description<br> is here #2
-                </h3>
-                <p class="project-details-descr">It is a good idea to think of your PC as an office. It stores files,
-                  programs, pictures.
-                  This can be compared to an actual office’s files, machines and decorations.
-                  The operating system is the boss. With this image in mind, think of an office you’ve visited that was
-                  slow and inefficient.</p>
-              </div>
-              <div class="project-details-img col-md-8">
-                <img alt="" class="img-responsive" src="img/projects/2-780x668.jpg">
-              </div>
-            </div>
-          </div>
-          <div class="project-details-item">
-            <div class="row">
-              <div class="project-details-info wow fadeInLeft">
-                <h3 class="project-details-title">
-                  Project description<br> is here #3
-                </h3>
-                <p class="project-details-descr">It is a good idea to think of your PC as an office. It stores files,
-                  programs, pictures.
-                  This can be compared to an actual office’s files, machines and decorations.
-                  The operating system is the boss. With this image in mind, think of an office you’ve visited that was
-                  slow and inefficient.</p>
-              </div>
-              <div class="project-details-img col-md-8 col-md-offset-4">
-                <img alt="" class="img-responsive" src="img/projects/3-780x668.jpg">
+              <div class="col-md-12 text-center" style="padding: 3rem;">
+                <div class="loader-brand">
+                  <div class="sk-folding-cube">
+                    <div class="sk-cube1 sk-cube"></div>
+                    <div class="sk-cube2 sk-cube"></div>
+                    <div class="sk-cube4 sk-cube"></div>
+                    <div class="sk-cube3 sk-cube"></div>
+                  </div>
+                </div>
+                <p style="margin-top: 1rem;">Loading project details...</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <header class="section-header" style="margin-bottom: 3rem;">
-        <h2 class="section-title"><span class="text-primary">Project</span> Progress</h2>
-      </header>
-
       <!-- Toggle Button -->
       <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
-        <button id="toggleInstructions" style="margin-top: 20px; background: none; border: none; 
-                          font-size: 20px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;">
+        <button id="toggleInstructions"
+          style="margin-top: 20px; background: none; border: none; 
+                                font-size: 20px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;">
           <span style="font-weight: 600;">How to Use the 3D Viewer and Tools</span>
           <span id="toggleIcon" style="font-weight: bold;">+</span>
-          </button>
-          </div>
-
-
+        </button>
+      </div>
+      
       <!-- Instructions Section (hidden by default) -->
       <section id="instructions" style="margin-top: 2rem; padding: 15px; border-radius: 5px; 
-                        box-shadow: 0 0 8px rgba(0,0,0,0.1); display: none;">
+                              box-shadow: 0 0 8px rgba(0,0,0,0.1); display: none;">
         <div style="display: flex; justify-content: center;">
           <ul style="line-height: 1.6;">
             <li><strong>Rotate:</strong> Click and drag with the left mouse button or tap and drag on touch devices to
@@ -291,16 +659,16 @@
         const instructions = document.getElementById('instructions');
         const toggleIcon = document.getElementById('toggleIcon');
 
-                  toggleButton.addEventListener('click', () => {
-                    if (instructions.style.display === 'none' || instructions.style.display === '') {
-                      instructions.style.display = 'block';
-                      toggleIcon.textContent = '−'; // minus sign when open
-                    } else {
-                      instructions.style.display = 'none';
-                      toggleIcon.textContent = '+'; // plus sign when closed
-                    }
-                  });
-                </script>
+        toggleButton.addEventListener('click', () => {
+          if (instructions.style.display === 'none' || instructions.style.display === '') {
+            instructions.style.display = 'block';
+            toggleIcon.textContent = '−'; // minus sign when open
+          } else {
+            instructions.style.display = 'none';
+            toggleIcon.textContent = '+'; // plus sign when closed
+          }
+        });
+      </script>
 
       <section class="contacts section">
         <div class="container">

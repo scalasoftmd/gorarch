@@ -16,6 +16,157 @@
   <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
   <link href="../css/style.css" rel="stylesheet" media="screen">
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+    import { getDatabase, ref, onValue } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js';
+
+    const firebaseConfig = {
+      databaseURL: "https://gorarch-60f19-default-rtdb.europe-west1.firebasedatabase.app/"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    // Load projects from Firebase
+    function loadProjects() {
+      const projectsRef = ref(database, 'portfolio');
+      
+      onValue(projectsRef, (snapshot) => {
+        const data = snapshot.val();
+        const projectsContainer = document.querySelector('.projects .row');
+        
+        if (!projectsContainer) return;
+        
+        // Clear existing projects
+        projectsContainer.innerHTML = '';
+        
+        if (data) {
+          Object.entries(data).forEach(([id, project]) => {
+            const projectElement = createProjectElement(id, project);
+            projectsContainer.appendChild(projectElement);
+          });
+        } else {
+          // Show empty state
+          projectsContainer.innerHTML = `
+            <div class="col-xs-12 text-center" style="padding: 3rem;">
+              <h3>Proiectele vor apărea în curând</h3>
+              <p>În prezent lucrăm la adăugarea proiectelor noastre în portofoliu.</p>
+            </div>
+          `;
+        }
+      }, (error) => {
+        console.error('Error loading projects:', error);
+        const projectsContainer = document.querySelector('.projects .row');
+        if (projectsContainer) {
+          projectsContainer.innerHTML = `
+            <div class="col-xs-12 text-center" style="padding: 3rem;">
+              <h3>Eroare la încărcarea proiectelor</h3>
+              <p>Nu s-au putut încărca proiectele. Încercați să reîmprospătați pagina.</p>
+            </div>
+          `;
+        }
+      });
+    }
+
+    function createProjectElement(id, project) {
+      const div = document.createElement('div');
+      div.className = 'project project-light col-sm-6 col-md-4 col-lg-3';
+      
+      // Use background image if available
+      const imageUrl = project.backgroundImage;
+      
+      // Get title based on current language (ro), with fallbacks
+      let projectTitle = 'Proiect';
+      if (project.title) {
+        if (typeof project.title === 'string') {
+          projectTitle = project.title;
+        } else if (typeof project.title === 'object') {
+          // Try current language (ro), then fallback to other languages
+          projectTitle = project.title.ro || 
+                        project.title.ru || 
+                        project.title.en || 
+                        project.title.de || 
+                        'Proiect';
+        }
+      }
+      
+      // Create tags HTML - handle both old array format and new multilingual format
+      let tagsHtml = '';
+      if (project.tags) {
+        let tagsToDisplay = [];
+        
+        if (Array.isArray(project.tags)) {
+          // Old format - array of strings
+          tagsToDisplay = project.tags;
+        } else if (typeof project.tags === 'object') {
+          // New multilingual format
+          const currentLangTags = project.tags.ro || project.tags.ru || project.tags.en || project.tags.de || '';
+          if (currentLangTags) {
+            tagsToDisplay = currentLangTags.split(',').map(tag => tag.trim()).filter(tag => tag);
+          }
+        }
+        
+        if (tagsToDisplay.length > 0) {
+          tagsHtml = tagsToDisplay.map((tag, index) => {
+            const marginLeft = index * 25;
+            return `
+              <span class="project-category" style="
+                display: inline-block; 
+                margin-left: ${marginLeft}px; 
+                margin-right: 5px; 
+                margin-bottom: 3px;
+                font-size: 13px;
+                line-height: 1.2;
+                white-space: nowrap;
+              ">
+                ${tag.toUpperCase()}
+              </span>
+            `;
+          }).join('');
+        }
+      }
+      
+      if (!tagsHtml) {
+        // Fallback to client if no tags
+        tagsHtml = `<h4 class="project-category">${project.client || 'Arhitectură'}</h4>`;
+      }
+      
+      div.innerHTML = `
+        <a href="/ro/project.html?id=${id}" title="${projectTitle}">
+          <figure>
+            <div style="width: 100%; height: 900px; overflow: hidden; position: relative;">
+              <img alt="${projectTitle}" 
+                   src="${imageUrl}" 
+                   style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            </div>
+            <figcaption>
+              <h3 class="project-title">
+                ${projectTitle}
+              </h3>
+              <div style="margin-top: 8px; line-height: 1.3;">
+                ${tagsHtml}
+              </div>
+              <div class="project-zoom"></div>
+            </figcaption>
+          </figure>
+        </a>
+      `;
+      
+      return div;
+    }
+
+    // Load projects when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadProjects);
+    } else {
+      loadProjects();
+    }
+
+    // Make functions available globally if needed
+    window.loadProjects = loadProjects;
+  </script>
 </head>
 
 <body>
@@ -178,135 +329,18 @@
       <!-- Projects -->
 
       <section class="projects">
-        <div class="row">
-          <div class="project project-light col-sm-6 col-md-4 col-lg-3">
-            <a href="/ro/project.html?id=medical-center" title="Centru de îngrijire la Paris">
-              <figure>
-                <img alt="Centru Medical" src="../img/projects/1.jpg">
-                <figcaption>
-                  <h3 class="project-title">
-                    Centru Medical
-                  </h3>
-                  <h4 class="project-category">
-                    Arhitectură
-                  </h4>
-                  <div class="project-zoom"></div>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-          <div class="project project-light col-sm-6 col-md-4 col-lg-3">
-            <a href="/ro/project.html?id=man-service" title="MAN Service Moldova">
-              <figure>
-                <img alt="MAN Service Moldova" src="../img/projects/4.png">
-                <figcaption>
-                  <h3 class="project-title">
-                    MAN Service<br>Moldova
-                  </h3>
-                  <h4 class="project-category">
-                    Arhitectură
-                  </h4>
-                  <div class="project-zoom"></div>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-          <div class="project col-sm-6 col-md-4 col-lg-3">
-            <a href="/ro/project.html?id=estera-2" title="Complex rezidențial modern Estera II">
-              <figure>
-                <img alt="Complex rezidențial Estera II" src="../img/projects/3.jpg">
-                <figcaption>
-                  <h3 class="project-title">
-                    Complex rezidențial<br>Estera II
-                  </h3>
-                  <h4 class="project-category">
-                    Arhitectură
-                  </h4>
-                  <div class="project-zoom"></div>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-          <div class="project col-sm-6 col-md-4 col-lg-3"></div>
-          <div class="project col-sm-6 col-md-4 col-lg-3">
-            <a href="/ro/project.html?id=orhei-apartments" title="Complex rezidențial modern Orhei">
-              <figure>
-                <img alt="Complex rezidențial Orhei" src="../img/projects/5.jpg">
-                <figcaption>
-                  <h3 class="project-title">
-                    Complex rezidențial<br>Orhei
-                  </h3>
-                  <h4 class="project-category">
-                    Arhitectură
-                  </h4>
-                  <div class="project-zoom"></div>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-          <div class="project project-light col-sm-6 col-md-4 col-lg-3">
-            <a href="/ro/project.html?id=carvidon" title="Complex agro-tehnic CARVIDON">
-              <figure>
-                <img alt="Complex agro-tehnic CARVIDON" src="../img/projects/8.jpg">
-                <figcaption>
-                  <h3 class="project-title">
-                    Complex agro-tehnic <br> CARVIDON
-                  </h3>
-                  <h4 class="project-category">
-                    Arhitectură
-                  </h4>
-                  <div class="project-zoom"></div>
-                </figcaption>
-              </figure>
-            </a>
-          </div>
-          <div class="project col-sm-6 col-md-4 col-lg-3">
-            <!-- <a href="../img/projects/7.jpg" title="Biroul Avalon Club">
-        <figure>
-          <img alt="Biroul Avalon Club" src="../img/projects/7.jpg">
-          <figcaption>
-            <h3 class="project-title">
-              Avalon Club<br>Birou
-            </h3>
-            <h4 class="project-category">
-              Arhitectură
-            </h4>
-            <div class="project-zoom"></div>
-          </figcaption>
-        </figure>
-      </a> -->
-          </div>
-          <div class="project project-light col-sm-6 col-md-4 col-lg-3">
-            <!-- <a href="../img/projects/6.jpg" title="Apartament 23">
-        <figure>
-          <img alt="Apartament 23" src="../img/projects/6.jpg">
-          <figcaption>
-            <h3 class="project-title">
-              Apartament 23
-            </h3>
-            <h4 class="project-category">
-              Arhitectură
-            </h4>
-            <div class="project-zoom"></div>
-          </figcaption>
-        </figure>
-      </a> -->
-          </div>
-          <div class="project col-sm-6 col-md-4 col-lg-3">
-            <!-- <a href="../img/projects/2.jpg" title="Clădire istorică din Magdeburg">
-        <figure>
-          <img alt="Clădire istorică" src="../img/projects/2.jpg">
-          <figcaption>
-            <h3 class="project-title">
-              Clădire istorică <br> din Magdeburg
-            </h3>
-            <h4 class="project-category">
-              Arhitectură
-            </h4>
-            <div class="project-zoom"></div>
-          </figcaption>
-        </figure>
-      </a> -->
+        <div class="row" id="projects-container">
+          <!-- Projects will be loaded dynamically from Firebase -->
+          <div class="col-xs-12 text-center" style="padding: 3rem;">
+            <div class="loader-brand">
+              <div class="sk-folding-cube">
+                <div class="sk-cube1 sk-cube"></div>
+                <div class="sk-cube2 sk-cube"></div>
+                <div class="sk-cube4 sk-cube"></div>
+                <div class="sk-cube3 sk-cube"></div>
+              </div>
+            </div>
+            <p style="margin-top: 1rem;">Se încarcă proiectele...</p>
           </div>
         </div>
       </section>
